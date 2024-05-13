@@ -20,7 +20,10 @@ class BookingVehicle extends Model
         'task_date',
         'estimated_time',
         'estimated_cost',
-        'status'
+        'status',
+        'actual_time',
+        'actual_cost',
+
     ];
 
     public function user()

@@ -20,9 +20,13 @@ return new class extends Migration
             $table->string('keluasan');
             $table->string('servistype');
             $table->string('tugas');
+            $table->string('task_date');
             $table->string('estimated_time')->default('pending');
             $table->string('estimated_cost')->default('pending');
             $table->string('status')->default('pending');
+            $table->string('actual_time');
+            $table->string('actual_cost');
+            
             $table->timestamps();
         });
     }

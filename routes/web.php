@@ -27,9 +27,6 @@ Route::get('/confirm-booking-vehicle', [BookingVehicleController::class, 'confir
 Route::post('/proceed-booking', [BookingVehicleController::class, 'store']);
 
 
-
-
-
 Route::get('/dashboard-pending', [DashboardController::class, 'userPending'])->middleware(['auth', 'verified'])->name('dashboard.pending');
 Route::get('/dashboard-approved', [DashboardController::class, 'userApproved'])->middleware(['auth', 'verified'])->name('dashboard.approved');
 Route::get('/dashboard-completed', [DashboardController::class, 'userCompleted'])->middleware(['auth', 'verified'])->name('dashboard.completed');

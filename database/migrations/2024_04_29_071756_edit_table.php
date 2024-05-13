@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('booking_vehicles', static function (Blueprint $table){
-            $table->string('task_date');
-        });
-
-        
+        // Schema::table('booking_vehicles', static function (Blueprint $table){
+        //     $table->string('task_date');
+        // });
+  
     }
 
     /**
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('booking_vehicles');
+        // Schema::dropIfExists('booking_vehicles');
     }
 };
