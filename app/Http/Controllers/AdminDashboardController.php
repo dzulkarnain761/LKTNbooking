@@ -10,7 +10,8 @@ class AdminDashboardController extends Controller
 {
     public function edit(BookingVehicle $booking)
     {
-        return view('admin.edit', ['booking' => $booking]);
+        $newDataCount = BookingVehicle::where('status', 'new')->count();
+        return view('admin.edit', ['booking' => $booking], compact('newDataCount'));
     }
 
     public function update(BookingVehicle $booking, Request $request)

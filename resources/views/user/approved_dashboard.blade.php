@@ -27,7 +27,7 @@
                                 {{-- <span> Created at : {{ $booking->created_at->format('d/m/Y') }} </span> --}}
                                 <div x-data="{ reject: false }">
                                     <!-- Modal for rejecting booking -->
-                                    <div x-show="reject"
+                                    <div x-cloak x-show="reject"
                                         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                                         <div class="bg-white rounded-lg p-8">
                                             <h1 class="text-xl mb-4 font-bold text-gray-700">Tolak Tempahan?</h1>

@@ -31,8 +31,8 @@
 
     <div
         class="relative bg-white border border-black p-10 md:max-w-md mx-auto rounded-xl z-50 flex justify-center items-center w-4/5">
-        <button type="button" @click="openHouse = false">
-            <img src="logo\cross.svg" alt="pangkah" class="h-8 w-8 absolute right-2 top-2">
+        <button type="button" @click="openHouse = false" tabindex="0" class="absolute right-2 top-2 focus:outline-blue-700">
+            <img src="logo\cross.svg" alt="pangkah" class="h-8 w-8">
         </button>
 
 
@@ -80,8 +80,8 @@
     <div class="absolute w-full h-full bg-gray-900 opacity-40"></div>
     <div
         class="relative bg-white border border-black p-10 md:max-w-md mx-auto rounded-xl z-50 flex justify-center items-center w-4/5">
-        <button type="button" @click="openTraktor = false">
-            <img src="logo\cross.svg" alt="pangkah" class="h-8 w-8 absolute right-2 top-2">
+        <button type="button" @click="openTraktor = false" tabindex="0" class="absolute right-2 top-2 focus:outline-blue-700">
+            <img src="logo\cross.svg" alt="pangkah" class="h-8 w-8">
         </button>
 
 

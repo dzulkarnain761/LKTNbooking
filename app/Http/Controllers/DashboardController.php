@@ -11,19 +11,22 @@ class DashboardController extends Controller
     public function adminPending()
     {
         $booking = BookingVehicle::where('status', 'pending')->get();
-        return view('admin.pending_dashboard', ['bookings' => $booking]);
+        $newDataCount = BookingVehicle::where('status', 'approved')->count();
+        return view('admin.pending_dashboard', ['bookings' => $booking, 'newDataCount' => $newDataCount]);
     }
 
     public function adminInProgress()
     {
         $booking = BookingVehicle::where('status', 'approved')->orWhere('status', 'confirmed')->get();
-        return view('admin.inprogress_dashboard', ['bookings' => $booking]);
+        $newDataCount = BookingVehicle::where('status', 'approved')->count();
+        return view('admin.inprogress_dashboard', ['bookings' => $booking, 'newDataCount' => $newDataCount]);
     }
 
     public function adminCompleted()
     {
         $booking = BookingVehicle::where('status', 'completed')->get();
-        return view('admin.completed_dashboard', ['bookings' => $booking]);
+        $newDataCount = BookingVehicle::where('status', 'approved')->count();
+        return view('admin.completed_dashboard', ['bookings' => $booking, 'newDataCount' => $newDataCount]);
     }
 
     public function adminCancelled()
@@ -31,8 +34,8 @@ class DashboardController extends Controller
         $bookings = BookingVehicle::where('status', 'rejected')
             ->orderBy('updated_at', 'desc')
             ->paginate(5);
-
-        return view('admin.cancelled_dashboard', ['bookings' => $bookings]);
+        $newDataCount = BookingVehicle::where('status', 'approved')->count();
+        return view('admin.cancelled_dashboard', ['bookings' => $bookings, 'newDataCount' => $newDataCount]);
     }
 
 
@@ -44,9 +47,8 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'pending')->get();
-
-
-        return view('user.pending_dashboard', ['bookings' => $booking]);
+        $newDataCount = BookingVehicle::where('status', 'approved')->count();
+        return view('user.pending_dashboard', ['bookings' => $booking, 'newDataCount' => $newDataCount]);
     }
 
     public function userApproved()
@@ -55,8 +57,8 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'approved')->get();
-
-        return view('user.approved_dashboard', ['bookings' => $booking]);
+        $newDataCount = BookingVehicle::where('status', 'approved')->count();
+        return view('user.approved_dashboard', ['bookings' => $booking, 'newDataCount' => $newDataCount]);
     }
 
     public function userCompleted()
@@ -65,8 +67,8 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'completed')->get();
-
-        return view('user.completed_dashboard', ['bookings' => $booking]);
+        $newDataCount = BookingVehicle::where('status', 'approved')->count();
+        return view('user.completed_dashboard', ['bookings' => $booking, 'newDataCount' => $newDataCount]);
     }
 
     public function userCancelled()
@@ -75,7 +77,7 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'rejected')->get();
-
-        return view('user.cancelled_dashboard', ['bookings' => $booking]);
+        $newDataCount = BookingVehicle::where('status', 'approved')->count();
+        return view('user.cancelled_dashboard', ['bookings' => $booking, 'newDataCount' => $newDataCount]);
     }
 }
