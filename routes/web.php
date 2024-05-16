@@ -12,6 +12,9 @@ use App\Http\Controllers\UserDashboardController;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\Route;
 
+use App\Mail\TestEmail;
+use Illuminate\Support\Facades\Mail;
+
 Route::get('/', function () {
     return view('LKTNbooking.landing_page');
 });
@@ -22,7 +25,7 @@ Route::get('/loading', function(){
 
 Route::get('/booking-penginapan', [BookingPenginapanController::class, 'penginapan']);
 Route::get('/booking-jengkaut', [BookingVehicleController::class,'jengkaut']);
-Route::get('/payment-page-penginapan', [BookingPenginapanController::class, 'paymentPagePenginapan']);
+Route::get('/confirm-booking-penginapan', [BookingPenginapanController::class, 'confirmBookingPenginapan']);
 Route::get('/confirm-booking-vehicle', [BookingVehicleController::class, 'confirmBookingVehicle']);
 Route::post('/proceed-booking', [BookingVehicleController::class, 'store']);
 
@@ -41,6 +44,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+
+
+Route::get('/send-test-email', function () {
+    Mail::to('test@example.com')->send(new TestEmail());
+    return 'Test email sent!';
 });
 
 

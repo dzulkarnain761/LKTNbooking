@@ -35,7 +35,7 @@
                                     class="rounded-xl w-52 h-40 object-cover">
                             </div>
 
-                            <div class="mt-5 self-start sm:mt-0  sm:flex sm:flex-col sm:gap-4 sm:ml-8">
+                            <div class="mt-5 sm:mt-0  sm:flex sm:flex-col sm:gap-4 sm:ml-8">
                                 <h1 class="font-bold text-lg text-ellipsis ">{{ $room['name'] }}</h1>
                                 <p class="text-sm font-semibold text-gray-500">{{ $room['bedType'] }}</p>
                                 <p class="text-sm font-semibold text-gray-500">{{ 'Kapasiti: ' . $room['capacity'] }}</p>

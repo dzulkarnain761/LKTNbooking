@@ -56,7 +56,7 @@
                                 <tr>
                                     <th class="border border-black px-4 py-2 text-xs">Pilih Kerja</th>
                                     <th class="border border-black px-4 py-2 text-xs">Nama Kerja</th>
-                                    <th class="border border-black px-4 py-2 text-xs">Harga</th>
+                                    <th class="border border-black px-4 py-2 text-xs">Harga/Jam</th>
 
                                 </tr>
                             </thead>
@@ -81,11 +81,11 @@
                             </tbody>
                         </table>
 
-
+                        
 
                     </div>
-
-
+                    <br>
+                    <p>*Note : Harga akan direvisi semula oleh admin</p>
                 </div>
                 <form method="GET" action="/confirm-booking-vehicle" class="flex flex-col ">
 

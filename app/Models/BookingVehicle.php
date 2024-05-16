@@ -23,7 +23,6 @@ class BookingVehicle extends Model
         'status',
         'actual_time',
         'actual_cost',
-
     ];
 
     public function user()

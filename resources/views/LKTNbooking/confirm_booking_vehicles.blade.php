@@ -64,7 +64,7 @@
                             <div class="flex justify-between">
                                 <p class="mt-1">{{ $tugas }}</p>
                                 @php
-                                    $harga = $jenisServis == 'Jengkaut' ? 100 : 40;
+                                    $harga = $jenisServis == 'Jengkaut' ? 40 : 100;
                                     $totalPrice += $harga;
                                 @endphp
                                 <p class="mt-1">RM{{ $harga }}</p>

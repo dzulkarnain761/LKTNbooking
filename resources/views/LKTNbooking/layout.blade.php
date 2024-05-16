@@ -19,10 +19,6 @@
         [x-cloak] {
             display: none !important;
         }
-
-        /* body {
-            font-family: 'Poppins', sans-serif;
-        } */
     </style>
 </head>
 

@@ -11,22 +11,7 @@ class BookingVehicleController extends Controller
 {
 
 
-    public function store(Request $request)
-    {
-
-        BookingVehicle::create([
-            'user_id' => $request->input('user-id'),
-            'negeri' => $request->input('negeri'),
-            'daerah' => $request->input('daerah'),
-            'kawasan' => $request->input('kawasan'),
-            'keluasan' => $request->input('keluasan'),
-            'servistype' => $request->input('servis-type'),
-            'task_date' => $request->input('task-date'),
-            'tugas' => $request->input('tugas'),
-        ]);
-
-        return redirect('loading');
-    }
+    
 
     public function jengkaut(Request $request)
     {
@@ -84,6 +69,8 @@ class BookingVehicleController extends Controller
         
     }
 
+    
+
 
     public function confirmBookingVehicle(Request $request)
     {
@@ -99,7 +86,7 @@ class BookingVehicleController extends Controller
         $negeri = $request->input('negeri');
         $pilihanTugas = $request->input('pilihan-tugas');
 
-        return view('LKTNbooking.payment_page_vehicles', [
+        return view('LKTNbooking.confirm_booking_vehicles', [
             'pilihanTugas' => $pilihanTugas,
             'lokasiTugas' => $lokasiTugas,
             'daerah' => $daerah,
@@ -108,6 +95,24 @@ class BookingVehicleController extends Controller
             'keluasanTanah' => $keluasanTanah,
             'jenisServis' => $jenisServis,
         ]);
+    }
+
+
+    public function store(Request $request)
+    {
+
+        BookingVehicle::create([
+            'user_id' => $request->input('user-id'),
+            'negeri' => $request->input('negeri'),
+            'daerah' => $request->input('daerah'),
+            'kawasan' => $request->input('kawasan'),
+            'keluasan' => $request->input('keluasan'),
+            'servistype' => $request->input('servis-type'),
+            'task_date' => $request->input('task-date'),
+            'tugas' => $request->input('tugas'),
+        ]);
+
+        return redirect('loading');
     }
 
 }

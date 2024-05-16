@@ -61,7 +61,7 @@ class BookingPenginapanController extends Controller
         }
     }
 
-    public function paymentPagePenginapan(Request $request)
+    public function confirmBookingPenginapan(Request $request)
     {
 
         $rooms = $request->input('rooms');
@@ -73,7 +73,7 @@ class BookingPenginapanController extends Controller
         $tempoh = $request->input('tempoh');
 
     
-        return view('LKTNbooking.payment_page_penginapan', [
+        return view('LKTNbooking.confirm_booking_penginapan', [
             'checkin' => $checkin,
             'checkout' => $checkout,
             'tempoh' => $tempoh,
