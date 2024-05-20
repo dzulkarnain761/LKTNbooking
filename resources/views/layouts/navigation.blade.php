@@ -20,23 +20,18 @@
                         {{ __('Pending') }}
                     </x-nav-link>
 
+
+
                     <x-nav-link :href="Auth::user()->usertype == 'admin'
                         ? route('admin.dashboard.inprogress')
                         : route('dashboard.approved')" :active="Auth::user()->usertype == 'admin'
                         ? request()->routeIs('admin.dashboard.inprogress')
-                        : request()->routeIs('dashboard.approved')" x-data="{ showIndicator: {{ $newDataCount > 0 ? 'true' : 'false' }} }"
-                        @click="showIndicator = false">
+                        : request()->routeIs('dashboard.approved')">
 
                         @if (Auth::user()->usertype == 'admin')
                             {{ __('In Progress') }}
-                            <template x-if="showIndicator">
-                                <span class="inline-block w-2 h-2 ml-2 rounded-full bg-red-500"></span>
-                            </template>
                         @else
                             {{ __('Approved') }}
-                            <template x-if="showIndicator">
-                                <span class="inline-block w-2 h-2 ml-2 rounded-full bg-red-500"></span>
-                            </template>
                         @endif
                     </x-nav-link>
 

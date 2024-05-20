@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('booking_vehicles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->index();
+            $table->foreignId('user_id')->index()->cascade();
             $table->string('negeri');
             $table->string('daerah');
             $table->string('kawasan');
@@ -24,9 +24,8 @@ return new class extends Migration
             $table->string('estimated_time')->default('pending');
             $table->string('estimated_cost')->default('pending');
             $table->string('status')->default('pending');
-            $table->string('actual_time');
-            $table->string('actual_cost');
-            
+            $table->string('actual_cost')->nullable();
+            $table->string('actual_time')->nullable();
             $table->timestamps();
         });
     }

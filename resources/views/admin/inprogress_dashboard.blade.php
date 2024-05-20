@@ -8,29 +8,6 @@
         </h2>
     </x-slot>
 
-
-
-    {{-- @if (session()->has('terima') || session()->has('tolak'))
-        <div id="session-messages-wrapper" class="fixed top-0 left-0 w-full flex justify-center">
-            @if (session()->has('terima'))
-                <div class="max-w-6xl mx-auto p-2 bg-blue-200 text-blue-800 text-sm rounded border border-blue-300 my-3">
-                    {{ session('terima') }}
-                </div>
-            @elseif(session()->has('tolak'))
-                <div
-                    class="max-w-6xl mx-auto p-2 bg-yellow-100 text-yellow-800 text-sm rounded border border-yellow-300 my-3">
-                    {{ session('tolak') }}
-                </div>
-            @endif
-        </div>
-    @endif --}}
-
-
-
-
-
-
-
     @if ($bookings->isNotEmpty())
     @foreach ($bookings as $booking)
         <div class="py-8">

@@ -13,8 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('booking_vehicles', static function (Blueprint $table){
-            $table->string('actual_cost')->nullable();
-            $table->string('actual_time')->nullable();
+            
         });
   
     }
