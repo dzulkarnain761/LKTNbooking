@@ -12,9 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('booking_vehicles', static function (Blueprint $table){
-            
-        });
+        
   
     }
 

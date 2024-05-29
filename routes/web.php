@@ -4,10 +4,12 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\BookingPenginapanController;
 use App\Http\Controllers\BookingVehicleController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomePAgeController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserDashboardController;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +24,14 @@ Route::get('/', function () {
 Route::get('/loading', function(){
     return view('loading');
 })->name('loading');
+
+Route::get('/test', function(){
+    return view('test');
+})->name('test');
+
+
+
+Route::get('vehicle-booking-calendar', [EventController::class, 'myCalendar'])->name('vehicle.booking.calendar');
 
 Route::get('/booking-penginapan', [BookingPenginapanController::class, 'penginapan']);
 Route::get('/booking-jengkaut', [BookingVehicleController::class,'jengkaut']);

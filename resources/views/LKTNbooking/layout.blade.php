@@ -20,6 +20,7 @@
             display: none !important;
         }
     </style>
+     
 </head>
 
 <body class="font-poppins bg-bgcolor">
@@ -36,7 +37,8 @@
         checkInDate: new Date().toISOString().split('T')[0],
     
     }">
-        <header class="shadow-md sticky top-0 bg-bgcolor">
+        <header class="shadow-md sticky top-0 bg-bgcolor z-50">
+            
             @yield('header')
         </header>
 
@@ -48,7 +50,7 @@
             @yield('footer')
             </footer>
 
-            @include('LKTNbooking/partials/modals')
+            {{-- @include('LKTNbooking/partials/modals') --}}
     </div>
 
 </body>

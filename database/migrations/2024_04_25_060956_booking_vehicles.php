@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('booking_vehicles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->index()->cascade();
-            $table->string('negeri');
-            $table->string('daerah');
-            $table->string('kawasan');
-            $table->string('keluasan');
-            $table->string('servistype');
-            $table->string('tugas');
+            $table->string('vehicle_type');
+            $table->string('task');
+            $table->string('state');
+            $table->string('district');
+            $table->string('location');
+            $table->string('land_size');
             $table->string('task_date');
             $table->string('estimated_time')->default('pending');
             $table->string('estimated_cost')->default('pending');
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+    
     }
 };

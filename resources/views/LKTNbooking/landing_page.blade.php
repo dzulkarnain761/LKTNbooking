@@ -15,19 +15,16 @@
         <div class="p-8 max-w-lg self-center md:max-w-xl ">
             <div class=" flex justify-center gap-8">
 
-                <img src="images\bilik asrama.jpeg" alt="bilik asrama"
-                    class="w-1/3 rounded-3xl shadow-lg  object-cover">
+                <img src="images\bilik asrama.jpeg" alt="bilik asrama" class="w-1/3 rounded-3xl shadow-lg  object-cover">
 
 
-                <img src="images\bilik vip.jpeg" alt="bilik vip"
-                    class="w-2/3 rounded-3xl shadow-lg  object-cover">
+                <img src="images\bilik vip.jpeg" alt="bilik vip" class="w-2/3 rounded-3xl shadow-lg  object-cover">
 
             </div>
 
             <div class=" pt-10 flex justify-center">
 
-                <img src="images\rumah-tumpangan.jpg" alt="homestay"
-                    class="w-4/5 rounded-3xl shadow-lg  object-cover">
+                <img src="images\rumah-tumpangan.jpg" alt="homestay" class="w-4/5 rounded-3xl shadow-lg  object-cover">
 
             </div>
         </div>
@@ -41,10 +38,10 @@
                 <p class="leading-loose text-md mt-7 md:text-lg">Nikmati penginapan selesa seperti di rumah. Ada dorm, suite
                     VIP, dan
                     homestay. Rasai keramahan sejati dan cipta kenangan tak terlupakan.</p>
-                    <div class="flex justify-center">
-                        {{-- <button class="mt-8 bg-secondary p-4 text-white rounded-2xl" @click="openHouse = !openHouse">Tempah Sekarang</button> --}}
-                        <x-primary-button class="mt-8 py-4" @click="openHouse = !openHouse">Tempah Sekarang</x-primary-button>
-                    </div>
+                <div class="flex justify-center">
+                    {{-- <button class="mt-8 bg-secondary p-4 text-white rounded-2xl" @click="openHouse = !openHouse">Tempah Sekarang</button> --}}
+                    <x-primary-button class="mt-8 py-4" @click="openHouse = !openHouse">Tempah Sekarang</x-primary-button>
+                </div>
 
 
             </div>
@@ -77,10 +74,11 @@
                     </h1>
                     <p class="leading-loose text-md mt-7 md:text-lg">Ruang kuliah yang nyaman dan lengkap untuk pengalaman
                         belajar yang optimal. Temukan inspirasi baru di sini.</p>
-                        <div class="flex justify-center">
-                            {{-- <button class="mt-8 bg-secondary p-4 text-white uppercase rounded-2xl" @click="openTraktor = !openTraktor">Tempah Sekarang</button> --}}
-                            <x-primary-button class="mt-8 py-4" @click="openTraktor = !openTraktor">Tempah Sekarang</x-primary-button>
-                        </div>
+                    <div class="flex justify-center">
+                        <a href="{{ route('vehicle.booking.calendar') }}"><x-primary-button class="mt-8 py-4" >Tempah
+                            Sekarang</x-primary-button></a>
+                        
+                    </div>
                 </div>
 
             </div>
@@ -114,8 +112,9 @@
         </div>
 
         <div class="flex justify-center">
-            {{-- <button class="mt-8 bg-secondary p-4 text-white rounded-2xl" @click="openTraktor = !openTraktor">Tempah Sekarang</button> --}}
-            <x-primary-button class="mt-8 py-4" @click="openTraktor = !openTraktor">Tempah Sekarang</x-primary-button>
+            <a href="{{ route('vehicle.booking.calendar') }}"><x-primary-button class="mt-8 py-4" @click="openTraktor = !openTraktor">Tempah
+                    Sekarang</x-primary-button></a>
+
         </div>
 
 
