@@ -11,8 +11,6 @@ class BookingVehicleController extends Controller
 {
 
 
-    
-
     public function jengkaut(Request $request)
     {
         $vehicleType = $request->input('vehicle-type');
@@ -69,32 +67,12 @@ class BookingVehicleController extends Controller
         
     }
 
-    
-
-
     public function confirmBookingVehicle(Request $request)
     {
+        $selectedDate = request('selectedDate');
+        $selectedTask = request('selectedTask');
 
-        $jenisSewa = request('jenisSewa');
-
-        $jenisServis = $request->input('jenis-servis');
-        $tarikhTempahan = $request->input('tarikh-tempahan');
-        $keluasanTanah = $request->input('keluasan-tanah');
-
-        $lokasiTugas = $request->input('lokasi-tugas');
-        $daerah = $request->input('pilih-daerah');
-        $negeri = $request->input('negeri');
-        $pilihanTugas = $request->input('pilihan-tugas');
-
-        return view('LKTNbooking.confirm_booking_vehicles', [
-            'pilihanTugas' => $pilihanTugas,
-            'lokasiTugas' => $lokasiTugas,
-            'daerah' => $daerah,
-            'negeri' => $negeri,
-            'tarikhTempahan' => $tarikhTempahan,
-            'keluasanTanah' => $keluasanTanah,
-            'jenisServis' => $jenisServis,
-        ]);
+        return view('LKTNbooking.confirm_booking_vehicles', compact('selectedDate', 'selectedTask'));
     }
 
 

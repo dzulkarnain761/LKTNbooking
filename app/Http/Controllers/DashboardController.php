@@ -25,7 +25,6 @@ class DashboardController extends Controller
     public function adminCompleted()
     {
         $booking = BookingVehicle::where('status', 'completed')->get();
-        
         return view('admin.completed_dashboard', ['bookings' => $booking]);
     }
 

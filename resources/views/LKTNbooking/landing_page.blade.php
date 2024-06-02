@@ -48,7 +48,6 @@
 
         </div>
 
-
     </section>
 
     {{-- Dewan/bilik Kuliah --}}
@@ -75,7 +74,7 @@
                     <p class="leading-loose text-md mt-7 md:text-lg">Ruang kuliah yang nyaman dan lengkap untuk pengalaman
                         belajar yang optimal. Temukan inspirasi baru di sini.</p>
                     <div class="flex justify-center">
-                        <a href="{{ route('vehicle.booking.calendar') }}"><x-primary-button class="mt-8 py-4" >Tempah
+                        <a href=""><x-primary-button class="mt-8 py-4" >Tempah
                             Sekarang</x-primary-button></a>
                         
                     </div>
@@ -112,7 +111,7 @@
         </div>
 
         <div class="flex justify-center">
-            <a href="{{ route('vehicle.booking.calendar') }}"><x-primary-button class="mt-8 py-4" @click="openTraktor = !openTraktor">Tempah
+            <a href="{{ route('vehicle.booking.calendar') }}"><x-primary-button class="mt-8 py-4">Tempah
                     Sekarang</x-primary-button></a>
 
         </div>

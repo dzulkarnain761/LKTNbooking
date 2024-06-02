@@ -9,6 +9,7 @@
         $phone_number = Auth::user()->phone_number;
 
     @endphp
+    
     <section class="mt-10 mb-10">
         <form action="/proceed-booking" method="POST">
             @csrf

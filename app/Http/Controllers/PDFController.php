@@ -13,6 +13,5 @@ class PDFController extends Controller
     {
         $pdf = PDF::loadView('quotation',['booking' => $booking]);
         return $pdf->stream('quotation.pdf');
-        
     }
 }

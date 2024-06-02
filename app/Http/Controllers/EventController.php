@@ -23,14 +23,14 @@ class EventController extends Controller
         $tasksBackhoe = array();
         $tasksTracktor = array();
 
-        foreach($tasksBackhoeDB as $task){
+        foreach ($tasksBackhoeDB as $task) {
             $tasksBackhoe[] = array(
                 'task_name' => $task->task_name,
                 'task_price' => $task->price,
             );
         }
 
-        foreach($tasksTracktorDB as $task){
+        foreach ($tasksTracktorDB as $task) {
             $tasksTracktor[] = array(
 
                 'task_name' => $task->task_name,
@@ -57,8 +57,16 @@ class EventController extends Controller
             );
         }
 
-        // dd($tasksTracktor);
+        if (auth()->check()) {
 
-        return view('LKTNbooking.mycalendar', compact('vehicles', 'tasksBackhoe', 'tasksTracktor', 'eventBackhoe', 'eventTracktor'));
+            return view('LKTNbooking.mycalendar', compact('vehicles', 'tasksBackhoe', 'tasksTracktor', 'eventBackhoe', 'eventTracktor'));
+        } else {
+            // User is not logged in, redirect to the login page
+            return redirect('login');
+        }
+
+
+        // return view('LKTNbooking.mycalendar', compact('vehicles', 'tasksBackhoe', 'tasksTracktor', 'eventBackhoe', 'eventTracktor'));
+
     }
 }
