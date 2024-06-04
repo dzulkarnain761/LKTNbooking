@@ -21,34 +21,34 @@ Route::get('/', function () {
     return view('LKTNbooking.landing_page');
 });
 
-Route::get('/loading', function(){
+Route::get('/loading', function () {
     return view('loading');
 })->name('loading');
 
-Route::get('/test', function(){
+Route::get('/test', function () {
     return view('test');
 })->name('test');
 
 
 
-Route::get('vehicle-booking-calendar', [EventController::class, 'myCalendar'])->name('vehicle.booking.calendar');
+Route::get('/vehicle-booking-calendar', [EventController::class, 'vehicleCalendar'])->name('vehicle.booking.calendar');
 
 Route::get('/booking-penginapan', [BookingPenginapanController::class, 'penginapan']);
-Route::get('/booking-jengkaut', [BookingVehicleController::class,'jengkaut']);
+Route::get('/booking-jengkaut', [BookingVehicleController::class, 'jengkaut']);
 
 Route::get('/confirm-booking-penginapan', [BookingPenginapanController::class, 'confirmBookingPenginapan']);
 Route::get('/confirm-booking-vehicle', [BookingVehicleController::class, 'confirmBookingVehicle'])->name('confirm.booking.vehicle');
-Route::post('/proceed-booking', [BookingVehicleController::class, 'store']);
 
+Route::post('/create-booking-booking', [BookingVehicleController::class, 'store'])->name('create.booking.vehicle');
 
-Route::get('/dashboard-pending', [DashboardController::class, 'userPending'])->middleware(['auth', 'verified'])->name('dashboard.pending');
-Route::get('/dashboard-approved', [DashboardController::class, 'userApproved'])->middleware(['auth', 'verified'])->name('dashboard.approved');
-Route::get('/dashboard-completed', [DashboardController::class, 'userCompleted'])->middleware(['auth', 'verified'])->name('dashboard.completed');
-Route::get('/dashboard-cancelled', [DashboardController::class, 'userCancelled'])->middleware(['auth', 'verified'])->name('dashboard.cancelled');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard-pending', [DashboardController::class, 'userPending'])->name('dashboard.pending');
+    Route::get('/dashboard-approved', [DashboardController::class, 'userApproved'])->name('dashboard.approved');
+    Route::get('/dashboard-completed', [DashboardController::class, 'userCompleted'])->name('dashboard.completed');
+    Route::get('/dashboard-cancelled', [DashboardController::class, 'userCancelled'])->name('dashboard.cancelled');
+});
 
 Route::get('/dashboard/{booking}/reject', [UserDashboardController::class, 'reject'])->name('booking.reject');
-
-
 Route::get('/generate-quotation/{booking}', [PDFController::class, 'generateQuotation'])->name('view.quotation');
 
 Route::middleware('auth')->group(function () {
@@ -58,8 +58,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
-
 Route::get('/send-test-email', function () {
     Mail::to('test@example.com')->send(new TestEmail());
     return 'Test email sent!';
@@ -67,19 +65,17 @@ Route::get('/send-test-email', function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // Admin Dashboard Routes
-Route::get('admin/dashboard-pending', [DashboardController::class, 'adminPending'])->middleware(['auth', 'admin'])->name('admin.dashboard.pending');
-Route::get('admin/dashboard-inprogress', [DashboardController::class, 'adminInProgress'])->middleware(['auth', 'admin'])->name('admin.dashboard.inprogress');
-Route::get('admin/dashboard-completed', [DashboardController::class, 'adminCompleted'])->middleware(['auth', 'admin'])->name('admin.dashboard.completed');
-Route::get('admin/dashboard-cancelled', [DashboardController::class, 'adminCancelled'])->middleware(['auth', 'admin'])->name('admin.dashboard.cancelled');
 
-Route::get('/admin/dashboard/{booking}/edit', [AdminDashboardController::class, 'edit'])->name('admin.booking.edit');
-Route::put('/admin/dashboard/{booking}/update', [AdminDashboardController::class, 'update'])->name('admin.booking.update');
-Route::get('/admin/dashboard/{booking}/reject', [AdminDashboardController::class, 'reject'])->name('admin.booking.reject');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('admin/dashboard-pending', [DashboardController::class, 'adminPending'])->name('admin.dashboard.pending');
+    Route::get('admin/dashboard-inprogress', [DashboardController::class, 'adminInProgress'])->name('admin.dashboard.inprogress');
+    Route::get('admin/dashboard-completed', [DashboardController::class, 'adminCompleted'])->name('admin.dashboard.completed');
+    Route::get('admin/dashboard-cancelled', [DashboardController::class, 'adminCancelled'])->name('admin.dashboard.cancelled');
 
-
-
-
-
+    Route::get('/admin/dashboard/{booking}/edit', [AdminDashboardController::class, 'edit'])->name('admin.booking.edit');
+    Route::put('/admin/dashboard/{booking}/update', [AdminDashboardController::class, 'update'])->name('admin.booking.update');
+    Route::get('/admin/dashboard/{booking}/reject', [AdminDashboardController::class, 'reject'])->name('admin.booking.reject');
+});

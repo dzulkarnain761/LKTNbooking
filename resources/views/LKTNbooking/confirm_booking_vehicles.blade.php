@@ -1,5 +1,10 @@
 @extends('LKTNbooking.layout')
 
+
+@section('header')
+    @include('LKTNbooking.partials.navbar')
+@endsection
+
 @section('content')
     @php
 
@@ -9,91 +14,120 @@
         $phone_number = Auth::user()->phone_number;
 
     @endphp
-    
-    <section class="mt-10 mb-10">
-        <form action="/proceed-booking" method="POST">
-            @csrf
 
-            <div class="flex flex-col items-center">
 
-                <div class="w-5/6 max-w-xl flex flex-col">
-                    <h1 class="text-md font-bold">Tempahan Anda</h1>
-                    <p class="text-xs font-semibold text-gray-500">Pastikan semua butiran di halaman ini adalah betul sebelum
-                        meneruskan pembayaran.</p>
-                    <div class=" bg-white rounded-xl p-8 border border-black mt-4 mb-4">
-                        <div class="flex flex-col gap-2">
-                            <label for="name" class="text-sm">Nama Penuh :</label>
-                            <input type="text" class="border border-black rounded-md p-2 md:w-2/3"
-                                value="{{ $name }}" readonly>
-                            <label for="" class="text-sm">Email (Optional) :</label>
-                            <input type="text" class="border border-black rounded-md p-2 md:w-1/2"
-                                placeholder="{{ $email }}">
-                            <label for="" class="text-sm">No Telefon :</label>
-                            <input type="text" class="border border-black rounded-md p-2 w-2/3 md:w-1/3"
-                                value="{{ $phone_number }}" readonly>
+    <form action="{{ route('create.booking.vehicle') }}" method="POST" >
+        @csrf
+
+        <div class="mt-10 mb-10 flex flex-col max-w-5xl mx-auto">
+            <div class="p-8 bg-white rounded-md shadow-md flex flex-col ">
+                <div id="info-container" class="flex flex-col space-y-4">
+                    <div class="flex flex-col space-y-4 max-w-2xl">
+                        <h1 class="font-bold text-lg">Isi Maklumat Tugasan</h1>
+                        <br>
+
+                        <div class="flex justify-between">
+                            <div class=" px-3 py-2">Negeri :</div>
+                            <div class="w-3/5">
+                                <select name="state" id="" class="w-full border shadow-sm px-3 py-2 rounded-md">
+                                    <option value="Kelantan">Kelantan</option>
+                                    <option value="Terengganu">Terengganu</option>
+                                </select>
+                            </div>
                         </div>
+                        <div class="flex justify-between">
+                            <div class=" px-3 py-2">Daerah :</div>
+                            <div class="w-3/5">
+                                <input type="text" name="district" required
+                                    class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
+                                    placeholder="Daerah" />
+                            </div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div class=" px-3 py-2">Lokasi Tugas :</div>
+                            <div class="w-3/5">
+                                <input type="text" name="location" required
+                                    class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
+                                    placeholder="Lokasi Tugas" />
+                            </div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div class=" px-3 py-2">Keluasan Tanah (Hektar):</div>
+                            <div class="w-3/5">
+                                <input type="number" name="land_size" required
+                                    class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
+                                    placeholder="Keluasan Tanah" />
+                            </div>
+                        </div>
+
 
 
                     </div>
-
-
-                    <div class=" bg-white rounded-xl p-8 border border-black mt-4 ">
-                        <h1 class="text-md font-bold">Butiran Tempahan</h1>
-                        <div class=" sm:flex sm:justify-between ">
-                            <div>
-                                <p class="mt-1">Servis : {{ $jenisServis }} </p>
-                                <p class="mt-1">Tarikh : {{ $tarikhTempahan }} </p>
-                                <p class="mt-1">Keluasan : {{ $keluasanTanah }} Hektar </p>
-                            </div>
-                            <div class="">
-                                <p class="mt-1">Daerah : {{ $daerah }}, {{ $negeri }}</p>
-                                <p class="mt-1">Lokasi : {{ $lokasiTugas }} </p>
-                            </div>
-
-                        </div>
-
-                        {{-- <hr class="border border-slate-400 mt-4"> --}}
-
-                        <h1 class="text-md font-bold mt-8 mb-2">Butiran Harga</h1>
-
-                        @php
-                            $tugasan = explode(',', $pilihanTugas);
-                            $totalPrice = 0;
-                        @endphp
-
-                        @foreach ($tugasan as $tugas)
-                            <div class="flex justify-between">
-                                <p class="mt-1">{{ $tugas }}</p>
-                                @php
-                                    $harga = $jenisServis == 'Jengkaut' ? 40 : 100;
-                                    $totalPrice += $harga;
-                                @endphp
-                                <p class="mt-1">RM{{ $harga }}</p>
-                            </div>
-                        @endforeach
-
-                        <hr class="border border-slate-400 mt-8">
-
-                        <div class="flex justify-between mt-4">
-                            <p class="mt-1 ">Jumlah Harga</p>
-                            <p class="mt-1 ">RM {{ $totalPrice }}</p>
-                        </div>
-                    </div>
-                    <input type="hidden" name="user-id" value="{{$userid}}">
-                    <input type="hidden" name="negeri" value="{{$negeri}}">
-                    <input type="hidden" name="daerah" value="{{$daerah}}">
-                    <input type="hidden" name="task-date" value="{{$tarikhTempahan}}">
-                    <input type="hidden" name="kawasan" value="{{$lokasiTugas}}">
-                    <input type="hidden" name="keluasan" value="{{$keluasanTanah}}">
-                    <input type="hidden" name="servis-type" value="{{$jenisServis}}">
-                    <input type="hidden" name="tugas" value="{{$pilihanTugas}}">
-
-                    <x-primary-button type="submit" class="mt-8 ">
-                        Sahkan Tempahan
-                    </x-primary-button>
                 </div>
-
             </div>
-        </form>
-    </section>
+        </div>
+
+
+        <div class="mt-10 mb-10 flex flex-col max-w-5xl mx-auto">
+            <div class="p-8 bg-white rounded-md shadow-md flex flex-col ">
+                <div id="info-container" class="flex flex-col space-y-4">
+                    <div class="flex flex-col space-y-4 max-w-2xl">
+                        <h1 class="font-bold text-lg">Maklumat Anda</h1>
+                        <br>
+
+
+                        <div class="flex justify-between">
+                            <div class=" px-3 py-2">Nama :</div>
+                            <div class="w-3/5">
+                                <input type="text"
+                                    class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
+                                    placeholder="Nama" value="{{ $name }}" disabled />
+                            </div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div class=" px-3 py-2">No. Telefon : </div>
+                            <div class="w-3/5">
+                                <input type="text"
+                                    class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
+                                    placeholder="No Tel" value="{{ $phone_number }}" disabled />
+                            </div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div class=" px-3 py-2">E mail :</div>
+                            <div class="w-3/5">
+                                <input type="text"
+                                    class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
+                                    placeholder="E mail" value="{{ $email }}" disabled />
+                            </div>
+                        </div>
+                        <br>
+                        <p>*Sila Kemaskini Maklumat Anda di 'Dashboard'.</p>
+
+                        <input type="hidden" value="{{ $userid }}" name="userid">
+                        <input type="hidden" value="{{ $selectedDate }}" name="selectedDate">
+                        <input type="hidden" value="{{ $selectedTask }}" name="selectedTask">
+                        <input type="hidden" value="{{ $selectedVehicle }}" name="selectedVehicle">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10 mb-10 flex flex-col max-w-5xl mx-auto">
+            <x-primary-button class="submitButton">Teruskan Tempahan</x-primary-button>
+
+            {{-- kalau load --}}
+            {{-- <x-primary-button class="hover:cursor-not-allowed" disabled>
+                <div class="flex items-center justify-center"> 
+                    <div class="h-4 w-4 border-t-transparent border-solid animate-spin rounded-full border-white border-4"></div>
+                    <div class="ml-2"> Processing... <div>
+                </div>
+            </x-primary-button> --}}
+        </div>
+
+
+    </form>
+
+
+
 @endsection

@@ -10,13 +10,13 @@ class BookingVehicle extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'negeri',
-        'daerah',
-        'kawasan',
-        'keluasan',
-        'servistype',
-        'tugas',
+        'user_id', 
+        'vehicle_type',
+        'task',
+        'state',
+        'district',
+        'location',
+        'land_size',
         'task_date',
         'estimated_time',
         'estimated_cost',

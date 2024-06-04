@@ -32,18 +32,20 @@
 
                             <p class="font-bold uppercase">Nama : <span class="font-normal">{{ $booking->user->name }}
                                 </span></p>
+                                <p class="font-bold uppercase">Phone Number : <span class="font-normal">{{ $booking->user->phone_number }}
+                                </span></p>
                             <p class="font-bold uppercase">Servis : <span class="font-normal">
-                                    {{ $booking->servistype }}</span></p>
-                            <p class="font-bold uppercase">Alamat : <span class="font-normal"> {{ $booking->kawasan }},
-                                    {{ $booking->daerah }}, {{ $booking->negeri }}</span>
+                                    {{ $booking->vehicle_type }}</span></p>
+                            <p class="font-bold uppercase">Alamat : <span class="font-normal"> {{ $booking->location }},
+                                    {{ $booking->district }}, {{ $booking->state }}</span>
                             </p>
-                            <p class="font-bold uppercase">Keluasan : <span class="font-normal">{{ $booking->keluasan }}
+                            <p class="font-bold uppercase">Keluasan : <span class="font-normal">{{ $booking->land_size }}
                                     Hektar </span> </p>
                             <p class="font-bold uppercase">Tarikh : <span class="font-normal"> {{ $booking->task_date }}
                                 </span></p>
 
                             @php
-                                $tugasan = explode(',', $booking->tugas);
+                                $tugasan = explode(',', $booking->task);
                             @endphp
                             <p class="font-bold uppercase">Tugasan : </p>
                             <ol>
@@ -62,7 +64,7 @@
     </div>
 
 
-    <div class="py-2">
+    
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 lg:max-w-4xl">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class=" p-6 text-gray-900">
@@ -72,6 +74,7 @@
 
                         @csrf
                         @method('PUT')
+                        
                         <div>
                             <label for="Anggaran Masa" class="block text-sm font-medium leading-6 text-gray-900">Anggaran Masa</label>
                             <div class="relative mt-2 rounded-md shadow-sm">
@@ -114,7 +117,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    
+
+        
 
     <script>
         setTimeout(function() {

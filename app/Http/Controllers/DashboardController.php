@@ -76,7 +76,7 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'rejected')->get();
-        
+
         return view('user.cancelled_dashboard', ['bookings' => $booking]);
     }
 }

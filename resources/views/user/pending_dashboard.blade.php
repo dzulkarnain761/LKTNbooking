@@ -22,7 +22,7 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 lg:max-w-4xl">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="flex flex-col p-6 items-center">
-                            <div class="flex flex-col w-3/4 gap-4 lg:w-1/2 items-center">
+                            <div class="flex flex-col w-3/4 gap-4 lg:w-2/3 items-center">
                                 <p class="font-bold uppercase ">Booking ID : #{{ $booking->id }}</p>
                                 <div class="flex gap-12">
 
@@ -50,20 +50,20 @@
                                         </div>
                                     </div>
                                     @php
-                                        $tugasan = explode(',', $booking->tugas);
+                                        $tugasan = explode(',', $booking->task);
                                         $bookingDateCreated = $booking->created_at;
-                                        $dateOnly = date('d/m/Y', strtotime($bookingDateCreated));
+                                        $dateCreate = date('d/m/Y', strtotime($bookingDateCreated));
 
                                     @endphp
 
                                     <div class="flex flex-col items-end ">
-                                        <p class="uppercase">{{ $dateOnly }}</p>
-                                        <p class="uppercase">{{ $booking->servistype }} </p>
+                                        <p class="uppercase">{{ $dateCreate }}</p>
+                                        <p class="uppercase">{{ $booking->vehicle_type }} </p>
                                         <p class="uppercase">{{ $booking->task_date }} </p>
-                                        <p class="uppercase">{{ $booking->kawasan }}</p>
-                                        <p class="uppercase">{{ $booking->daerah }}</p>
-                                        <p class="uppercase">{{ $booking->negeri }}</p>
-                                        <p class="uppercase">{{ $booking->keluasan }} Hektar</p>
+                                        <p class="uppercase">{{ $booking->location }}</p>
+                                        <p class="uppercase">{{ $booking->district }}</p>
+                                        <p class="uppercase">{{ $booking->state }}</p>
+                                        <p class="uppercase">{{ $booking->land_size }} Hektar</p>
 
                                         <ol>
                                             @php $counter = 1; @endphp

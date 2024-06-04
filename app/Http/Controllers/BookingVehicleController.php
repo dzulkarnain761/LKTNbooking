@@ -11,86 +11,51 @@ class BookingVehicleController extends Controller
 {
 
 
-    public function jengkaut(Request $request)
-    {
-        $vehicleType = $request->input('vehicle-type');
-        $negeriPilihan = $request->input('negeri-pilihan');
-        $tarikhMasuk = $request->input('tarikh-sewa');
-        $keluasanTanah = $request->input('keluasan-tanah');
-
-        $formattedtarikhMasuk = date('d/m/Y', strtotime($tarikhMasuk));
-
-        $tugasJengkaut = ['BC01-BERSIH KAWASAN', 'BC02-PERPARITAN'];
-
-        $tugasTraktor = ['TR01-PIRING', 'TR02-ROTOR I', 'TR03-ROTOR II', 'TR04-BATAS'];
-
-        $kelantan = ['Pasir Mas', 'Kota Bharu', 'Kubang Kerian'];
-
-        $terengganu = ['Bachok', 'Kuala Terengganu', 'Chendering'];
-        $negeri = [];
-
-
-        if ($negeriPilihan == "Kelantan") {
-            $negeri = $kelantan;
-        } elseif ($negeriPilihan == "Terengganu") {
-            $negeri = $terengganu;
-        }
-
-        if (auth()->check()) {
-
-            
-            if ($vehicleType == 'booking-jengkaut') {
-
-                return view('LKTNbooking.bookingPage.jengkaut', [
-                    'tarikhTempahan' => $formattedtarikhMasuk,
-                    'keluasanTanah' => $keluasanTanah,
-                    'negeriPilihan' => $negeriPilihan,
-                    'tugasJengkaut' => $tugasJengkaut,
-                    'negeri' => $negeri
-    
-                ]);
-            } else {
-    
-                return view('LKTNbooking.bookingPage.traktor', [
-                    'tarikhTempahan' => $formattedtarikhMasuk,
-                    'keluasanTanah' => $keluasanTanah,
-                    'negeriPilihan' => $negeriPilihan,
-                    'tugasTraktor' => $tugasTraktor,
-                    'negeri' => $negeri
-                ]);
-            }
-            
-        } else {
-            // User is not logged in, redirect to the login page
-            return redirect('login');
-        }
-        
-    }
 
     public function confirmBookingVehicle(Request $request)
     {
         $selectedDate = request('selectedDate');
         $selectedTask = request('selectedTask');
+        $selectedVehicle = request('selectedVehicle');
 
-        return view('LKTNbooking.confirm_booking_vehicles', compact('selectedDate', 'selectedTask'));
+        return view('LKTNbooking.confirm_booking_vehicles', compact('selectedDate', 'selectedTask', 'selectedVehicle'));
     }
 
 
     public function store(Request $request)
     {
+        $userid = request('userid');
+        $selectedDate = request('selectedDate');
+        $selectedTask = request('selectedTask');
+        $selectedVehicle = request('selectedVehicle');
+        $state = request('state');
+        $district = request('district');
+        $location = request('location');
+        $land_size = request('land_size');
+
+        // $allRequest = array(
+        //     'user_id' => $userid,
+        //     'selectedDate' => $selectedDate,
+        //     'selectedTask' => $selectedTask,
+        //     'selectedVehicle' => $selectedVehicle,
+        //     'state' => $state,
+        //     'district' => $district,
+        //     'location' => $location,
+        //     'land_size' => $land_size
+        // );
+
 
         BookingVehicle::create([
-            'user_id' => $request->input('user-id'),
-            'negeri' => $request->input('negeri'),
-            'daerah' => $request->input('daerah'),
-            'kawasan' => $request->input('kawasan'),
-            'keluasan' => $request->input('keluasan'),
-            'servistype' => $request->input('servis-type'),
-            'task_date' => $request->input('task-date'),
-            'tugas' => $request->input('tugas'),
+            'user_id' => $userid,
+            'vehicle_type' => $selectedVehicle,
+            'task_date' => $selectedDate,
+            'task' => $selectedTask,
+            'state' => $state,
+            'district' => $district,
+            'location' => $location,
+            'land_size' => $land_size
         ]);
 
-        return redirect('loading');
+        return redirect(route('dashboard.pending'));
     }
-
 }

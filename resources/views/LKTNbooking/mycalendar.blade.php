@@ -5,9 +5,13 @@
 
 @section('header')
     @include('LKTNbooking.partials.navbar')
-
-
-
+    <style>
+        .disabled-date {
+            background-color: red !important;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    </style>
 @endsection
 
 
@@ -21,8 +25,8 @@
                     <label>Jenis Kenderaan : </label>
                     <select id="vehicle_type" class="rounded-md">
                         <option value="" disabled selected>Pilih kenderaan</option>
-                        <option value="Backhoe">Backhoe</option>
-                        <option value="Tracktor">Tracktor</option>
+                        <option value="Jengkaut">Jengkaut</option>
+                        <option value="Tracktor">Traktor</option>
                         <option value="Jengkaut & Traktor">Jengkaut & Traktor</option>
                     </select>
                 </div>
@@ -34,7 +38,6 @@
                 </div>
 
                 <x-primary-button id="add-task-button" style="display:none">Tambah Tugas</x-primary-button>
-
 
                 <!-- Added tasks section -->
                 <div id="added-tasks-container" class="mt-4 w-full" style="display: none;">
@@ -78,13 +81,14 @@
 
                 <!--Footer-->
                 <div class="flex justify-end pt-2">
-                    <form action="{{route('confirm.booking.vehicle')}}" >
+                    <form action="{{ route('confirm.booking.vehicle') }}">
                         <input type="hidden" id="selectedDate" name="selectedDate">
                         <input type="hidden" id="selectedTask" name="selectedTask">
+                        <input type="hidden" id="selectedVehicle" name="selectedVehicle">
                         <button id="cancel-modal"
                             class="focus:outline-none modal-close px-4 bg-gray-400 p-3 rounded-lg text-black hover:bg-gray-300">Cancel</button>
                         <button id="confirm-modal"
-                            class="focus:outline-none px-4 bg-teal-500 p-3 ml-3 rounded-lg text-white hover:bg-teal-400" >Confirm</button>
+                            class="focus:outline-none px-4 bg-teal-500 p-3 ml-3 rounded-lg text-white hover:bg-teal-400">Confirm</button>
                     </form>
                 </div>
             </div>
@@ -102,6 +106,10 @@
         var eventBackhoe = @json($eventBackhoe);
         var eventTracktor = @json($eventTracktor);
         var allEvents = eventBackhoe.concat(eventTracktor);
+
+
+
+
 
         // Create a new Date object for the current date and time
         const today = new Date();
@@ -132,12 +140,6 @@
             let date;
             let task;
 
-
-
-            // document.getElementById('confirm-modal').addEventListener('click', function(){
-
-            // });
-
             document.getElementById('close-modal').addEventListener('click', function() {
                 event.preventDefault();
                 modal.style.display = 'none';
@@ -155,7 +157,7 @@
                 }
             });
 
-            let calendar;
+
             let addedTasks = [];
 
             function updateTasksAndEvents(selectedVehicle) {
@@ -163,21 +165,28 @@
 
                 let tasks = [];
                 let events = [];
+                let disableDate = [];
+
+                // console.log(events.start);
 
                 switch (selectedVehicle) {
-                    case 'Backhoe':
+                    case 'Jengkaut':
                         tasks = tasksBackhoe;
                         events = eventBackhoe;
+                        disableDate = eventBackhoe.map(event => event.start);
                         break;
                     case 'Tracktor':
                         tasks = tasksTracktor;
                         events = eventTracktor;
+                        disableDate = eventTracktor.map(event => event.start);
                         break;
                     case 'Jengkaut & Traktor':
                         tasks = allTasks;
                         events = allEvents;
+                        disableDate = allEvents.map(event => event.start);
                         break;
                 }
+
 
                 tasks.forEach(t => {
                     const option = document.createElement('option');
@@ -192,42 +201,40 @@
                 calendarContainer.style.display = 'block'; // Show calendar container
 
 
-                if (!calendar) {
-                    calendar = new Calendar(calendarEl, {
-                        plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-                        initialView: 'dayGridMonth',
-                        aspectRatio: 2,
-                        selectable: true,
-                        validRange: {
-                            start: formattedDate,
-                        },
-                        headerToolbar: {
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: ''
-                        },
-                        events: allEvents,
-                        eventBackgroundColor: 'red',
-                        dateClick: function(info) {
+               let calendar = new Calendar(calendarEl, {
+                    plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+                    initialView: 'dayGridMonth',
+                    aspectRatio: 2,
+                    // selectable: true,
+                    validRange: {
+                        start: formattedDate,
+                    },
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: ''
+                    },
+                    events: events,
+                    eventBackgroundColor: 'red',
+                    dateClick: function(info) {
 
-
-                            if (addedTasks.length === 0) {
-                                alert('Sila Tambah Tugasan!');
-                            } else {
-                                openModal(info.dateStr, addedTasks);
-                            }
-
+                        // Check if the clicked date is in the disableDate array
+                        if (disableDate.includes(info.dateStr)) {
+                            alert('Pilih Tarikh Lain.');
+                            return false; // Prevent further actions
                         }
-                    });
 
-                    calendar.render();
-                } else {
-                    // Update the events dynamically
-                    calendar.removeAllEvents(); // Clear current events
-                    events.forEach(event => {
-                        calendar.addEvent(event); // Add new events
-                    });
-                }
+                        if (addedTasks.length === 0) {
+                            alert('Sila Tambah Tugasan!');
+                        } else {
+                            openModal(info.dateStr, addedTasks, vehicleTypeSelect.value);
+                        }
+                    },
+
+                });
+
+                calendar.render();
+
 
             } //updateTaskandEvent
 
@@ -251,9 +258,8 @@
 
 
                 if (addedTasks.length === 0) {
-
                     addedTasksList.innerHTML = '<p>Tugasan akan dipapar di sini.</p>';
-                    console.log(addedTasksList);
+                    // console.log(addedTasksList);
                 }
 
                 addedTasks.forEach(task => {
@@ -277,20 +283,19 @@
             function formatDate(dateStr) {
 
                 let parts = dateStr.split('-');
-
                 return `${parts[2]}/${parts[1]}/${parts[0]}`;
             }
 
-            function openModal(date,task) {
-
+            function openModal(date, task, vehicle) {
                 let selectedDate = formatDate(date);
                 document.getElementById('selectedDate').value = selectedDate;
                 document.getElementById('modal-title').innerText = selectedDate;
                 document.getElementById('selectedTask').value = task;
+                document.getElementById('selectedVehicle').value = vehicle;
                 console.log(document.getElementById('selectedDate').value);
                 console.log(document.getElementById('selectedTask').value);
+                console.log(document.getElementById('selectedVehicle').value);
                 modal.style.display = 'flex';
-                
             }
 
             vehicleTypeSelect.addEventListener('change', (event) => {

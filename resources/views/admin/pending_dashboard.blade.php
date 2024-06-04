@@ -186,6 +186,7 @@
 
                                             
                                             <p class="font-bold uppercase">Full Name</p>
+                                            <p class="font-bold uppercase">Phone Number</p>
                                             <p class="font-bold uppercase">Servis</p>
                                             <p class="font-bold uppercase">tarikh</p>
                                             <p class="font-bold uppercase">alamat</p>
@@ -205,10 +206,11 @@
                                             <p class="font-bold uppercase">: </p>
                                             <p class="font-bold uppercase">: </p>
                                             <p class="font-bold uppercase">: </p>
+                                            <p class="font-bold uppercase">: </p>
                                         </div>
                                     </div>
                                     @php
-                                        $tugasan = explode(',', $booking->tugas);
+                                        $tugasan = explode(',', $booking->task);
                                         $bookingDateCreated = $booking->created_at;
                                         $dateOnly = date('d/m/Y', strtotime($bookingDateCreated));
 
@@ -218,12 +220,13 @@
 
                                         
                                         <p class="uppercase">{{ $booking->user->name }}</p>
-                                        <p class="uppercase">{{ $booking->servistype }} </p>
+                                        <p class="uppercase">{{ $booking->user->phone_number }}</p>
+                                        <p class="uppercase">{{ $booking->vehicle_type }} </p>
                                         <p class="uppercase">{{ $booking->task_date }} </p>
-                                        <p class="uppercase">{{ $booking->kawasan }}</p>
-                                        <p class="uppercase">{{ $booking->daerah }}</p>
-                                        <p class="uppercase">{{ $booking->negeri }}</p>
-                                        <p class="uppercase">{{ $booking->keluasan }} Hektar</p>
+                                        <p class="uppercase">{{ $booking->location }}</p>
+                                        <p class="uppercase">{{ $booking->district }}</p>
+                                        <p class="uppercase">{{ $booking->state }}</p>
+                                        <p class="uppercase">{{ $booking->land_size }} Hektar</p>
 
                                         <ol>
                                             @php $counter = 1; @endphp
