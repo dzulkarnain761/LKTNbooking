@@ -23,6 +23,8 @@ class BookingVehicle extends Model
         'status',
         'actual_time',
         'actual_cost',
+        'rejected_by',
+        'rejected_reason'
     ];
 
     public function user()

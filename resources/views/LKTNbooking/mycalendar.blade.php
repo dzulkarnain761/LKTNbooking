@@ -20,32 +20,35 @@
 
     <div class="mt-10 mb-10 flex flex-col max-w-5xl mx-auto">
         <div class="p-8 bg-white rounded-md shadow-md flex flex-col items-center">
-            <div id="info-container" class="flex flex-col space-y-4">
-                <div class="flex flex-col">
-                    <label>Jenis Kenderaan : </label>
-                    <select id="vehicle_type" class="rounded-md">
-                        <option value="" disabled selected>Pilih kenderaan</option>
-                        <option value="Jengkaut">Jengkaut</option>
-                        <option value="Tracktor">Traktor</option>
-                        <option value="Jengkaut & Traktor">Jengkaut & Traktor</option>
-                    </select>
+            <div class="w-2/5">
+                <div id="info-container" class="flex flex-col space-y-4">
+                    <div class="flex flex-col">
+                        <label>Jenis Kenderaan : </label>
+                        <select id="vehicle_type" class="rounded-md">
+                            <option value="" disabled selected>Pilih kenderaan</option>
+                            <option value="Jengkaut">Jengkaut</option>
+                            <option value="Tracktor">Traktor</option>
+                            <option value="Jengkaut & Traktor">Jengkaut & Traktor</option>
+                        </select>
+                    </div>
+
+
+                    <div id="task_span" style="display:none;flex-direction:column">
+                        <label>Pilihan Tugas :</label>
+                        <select id="task" class="rounded-md"></select>
+                    </div>
+
+                    <x-primary-button id="add-task-button" style="display:none">Tambah Tugas</x-primary-button>
+
+                    <!-- Added tasks section -->
+                    <div id="added-tasks-container" class="mt-4 w-full" style="display: none;">
+                        <h3>Tugasan yang ditambah :</h3>
+                        <ul id="added-tasks-list" class="list-decimal pl-5"></ul>
+                    </div>
+
                 </div>
-
-
-                <div id="task_span" style="display:none;flex-direction:column">
-                    <label>Pilihan Tugas :</label>
-                    <select id="task" class="rounded-md"></select>
-                </div>
-
-                <x-primary-button id="add-task-button" style="display:none">Tambah Tugas</x-primary-button>
-
-                <!-- Added tasks section -->
-                <div id="added-tasks-container" class="mt-4 w-full" style="display: none;">
-                    <h3>Tugasan yang ditambah :</h3>
-                    <ul id="added-tasks-list" class="list-decimal pl-5"></ul>
-                </div>
-
             </div>
+
         </div>
     </div>
 
@@ -58,7 +61,7 @@
 
 
     <div id="main-modal" class="fixed w-full h-100 inset-0 z-50 flex justify-center items-center"
-        style="background: rgba(0,0,0,.7); display:none;">
+        style="background: rgba(66, 66, 66, 0.7); display:none;">
         <div class="border bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
             <div class="modal-content py-4 text-left px-6">
                 <!--Title-->
@@ -85,10 +88,20 @@
                         <input type="hidden" id="selectedDate" name="selectedDate">
                         <input type="hidden" id="selectedTask" name="selectedTask">
                         <input type="hidden" id="selectedVehicle" name="selectedVehicle">
-                        <button id="cancel-modal"
-                            class="focus:outline-none modal-close px-4 bg-gray-400 p-3 rounded-lg text-black hover:bg-gray-300">Cancel</button>
-                        <button id="confirm-modal"
-                            class="focus:outline-none px-4 bg-teal-500 p-3 ml-3 rounded-lg text-white hover:bg-teal-400">Confirm</button>
+                        
+                        <div class="flex space-x-4">
+                            <button id="cancel-modal"
+                                class="flex items-center justify-center px-3 py-2 space-x-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-gray-500 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-500 focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+                                <span>Tolak</span>
+                            </button>
+
+                            <button type=submit id="confirm-modal"
+                                class="flex items-center justify-center px-3 py-2 space-x-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                <span>Terima</span>
+                            </button>
+
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -106,9 +119,6 @@
         var eventBackhoe = @json($eventBackhoe);
         var eventTracktor = @json($eventTracktor);
         var allEvents = eventBackhoe.concat(eventTracktor);
-
-
-
 
 
         // Create a new Date object for the current date and time
@@ -201,7 +211,7 @@
                 calendarContainer.style.display = 'block'; // Show calendar container
 
 
-               let calendar = new Calendar(calendarEl, {
+                let calendar = new Calendar(calendarEl, {
                     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
                     initialView: 'dayGridMonth',
                     aspectRatio: 2,

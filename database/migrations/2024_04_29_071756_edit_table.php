@@ -12,7 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
+        Schema::table('booking_vehicles', function (Blueprint $table) {
+            
+        });
   
     }
 
@@ -21,6 +23,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::dropIfExists('booking_vehicles');
+        // Schema::table('booking_vehicles', function($table) {
+        //     $table->dropColumn('reject_by');
+        //     $table->dropColumn('reject_reason');
+        // });
     }
 };

@@ -168,9 +168,9 @@
                         <tr>
                             <td>
                                 {{ $booking->user->name }} <br>
-                                {{ $booking->phone_number }}<br>
-                                {{ $booking->email }}<br>
-                                
+                                {{ $booking->user->phone_number }}<br>
+                                {{ $booking->user->email }}<br>
+
                             </td>
 
 
@@ -179,18 +179,26 @@
                 </td>
             </tr>
 
+
             <tr class="heading">
                 <td>Jenis Servis</td>
-                <td>Anggaran Masa</td>
+                <td></td>
             </tr>
 
             <tr class="details">
-                <td>{{ $booking->servistype}}</td>
-
-                <td> {{ $booking->estimated_time }}</td>
+                <td>{{ $booking->vehicle_type }}</td>
+                <td></td>
             </tr>
 
+            <tr class="heading">
+                <td>Lokasi</td>
+                <td></td>
+            </tr>
 
+            <tr class="details">
+                <td>{{ $booking->location }}<br> {{ $booking->district . ', ' . $booking->state }}</td>
+                <td></td>
+            </tr>
 
 
             <tr class="heading">
@@ -200,25 +208,24 @@
             </tr>
 
             @php
-                $tugasan = explode(',', $booking->tugas);
-                
+                $tasks = explode(',', $booking->task);
+                $prices = explode(',', $booking->estimated_cost);
+                $times = explode(',', $booking->estimated_time);
+                $totalPrice = 0;
             @endphp
 
-            @foreach ($tugasan as $task)
-                
+            @foreach ($tasks as $index => $task)
                 <tr class="item">
-                    <td>{{ $task }}</td>
-                    <td></td>
+                    <td>{{ $task . ' (' . $times[$index] . ')' }}</td>
+                    <td>RM {{ $prices[$index] }}</td>
                 </tr>
+                @php $totalPrice += $prices[$index] @endphp
             @endforeach
-
-
-
 
             <tr class="total">
                 <td></td>
 
-                <td>Total Price: RM {{ $booking->estimated_cost}}</td>
+                <td>Total Price: RM {{ $totalPrice }}</td>
             </tr>
         </table>
     </div>

@@ -46,10 +46,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard-approved', [DashboardController::class, 'userApproved'])->name('dashboard.approved');
     Route::get('/dashboard-completed', [DashboardController::class, 'userCompleted'])->name('dashboard.completed');
     Route::get('/dashboard-cancelled', [DashboardController::class, 'userCancelled'])->name('dashboard.cancelled');
+
+    Route::post('/dashboard/{booking}/reject', [UserDashboardController::class, 'reject'])->name('booking.reject'); 
 });
 
-Route::get('/dashboard/{booking}/reject', [UserDashboardController::class, 'reject'])->name('booking.reject');
 Route::get('/generate-quotation/{booking}', [PDFController::class, 'generateQuotation'])->name('view.quotation');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -76,6 +78,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard-cancelled', [DashboardController::class, 'adminCancelled'])->name('admin.dashboard.cancelled');
 
     Route::get('/admin/dashboard/{booking}/edit', [AdminDashboardController::class, 'edit'])->name('admin.booking.edit');
-    Route::put('/admin/dashboard/{booking}/update', [AdminDashboardController::class, 'update'])->name('admin.booking.update');
-    Route::get('/admin/dashboard/{booking}/reject', [AdminDashboardController::class, 'reject'])->name('admin.booking.reject');
+    Route::post('/admin/dashboard/{booking}/update', [AdminDashboardController::class, 'update'])->name('admin.booking.update');
+    Route::post('/admin/dashboard/{booking}/reject', [AdminDashboardController::class, 'reject'])->name('admin.booking.reject');
 });

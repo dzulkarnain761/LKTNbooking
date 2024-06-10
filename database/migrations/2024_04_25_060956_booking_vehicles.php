@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('status')->default('pending');
             $table->string('actual_cost')->nullable();
             $table->string('actual_time')->nullable();
+            $table->string('rejected_by')->nullable();
+            $table->string('rejected_reason')->nullable();
             $table->timestamps();
         });
     }

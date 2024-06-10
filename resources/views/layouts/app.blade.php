@@ -17,6 +17,12 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
 </head>
 
 <body class="font-poppins antialiased">

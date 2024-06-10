@@ -19,114 +19,397 @@
     @endif
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 lg:max-w-4xl">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 lg:max-w-6xl">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class=" p-6 text-gray-900">
+                <div class=" p-12 text-gray-900">
 
-                    <div class="flex flex-row justify-between items-center" x-data="{
-                        open: false,
-                    }">
-                        <div>
-                            <p class="font-bold uppercase">Tempahan ID : <span class="font-normal">
-                                    {{ $booking->id }}</span></p>
+                    <div class="flex flex-col space-y-4 md:flex-row md:justify-around md:items-baseline">
 
-                            <p class="font-bold uppercase">Nama : <span class="font-normal">{{ $booking->user->name }}
-                                </span></p>
-                                <p class="font-bold uppercase">Phone Number : <span class="font-normal">{{ $booking->user->phone_number }}
-                                </span></p>
-                            <p class="font-bold uppercase">Servis : <span class="font-normal">
-                                    {{ $booking->vehicle_type }}</span></p>
-                            <p class="font-bold uppercase">Alamat : <span class="font-normal"> {{ $booking->location }},
-                                    {{ $booking->district }}, {{ $booking->state }}</span>
-                            </p>
-                            <p class="font-bold uppercase">Keluasan : <span class="font-normal">{{ $booking->land_size }}
-                                    Hektar </span> </p>
-                            <p class="font-bold uppercase">Tarikh : <span class="font-normal"> {{ $booking->task_date }}
-                                </span></p>
-
-                            @php
-                                $tugasan = explode(',', $booking->task);
-                            @endphp
-                            <p class="font-bold uppercase">Tugasan : </p>
-                            <ol>
-                                @php $counter = 1; @endphp
-                                @foreach ($tugasan as $tugas)
-                                    <li>{{ $counter }}. {{ $tugas }}</li>
-                                    @php $counter++; @endphp
-                                @endforeach
-                            </ol>
+                        <div class="space-y-4">
+                            <div class="">
+                                <p class="font-semibold text-xs ">Nama :</p>
+                                <p class="">{{ $booking->user->name }}</p>
+                            </div>
+                            
+                            <div class="">
+                                <p class="font-semibold text-xs ">Alamat :</p>
+                                <p class="">{{ $booking->location }} , {{ $booking->district }},
+                                    {{ $booking->state }}</p>
+                            </div>
+    
+                            
+                            <div class="">
+                                <p class="font-semibold text-xs ">Tugasan :</p>
+                                <ol class="">
+                                    @php
+                                        $tugasan = explode(',', $booking->task);
+                                        $counter = 1;
+                                    @endphp
+                                    @foreach ($tugasan as $tugas)
+                                        <li>{{ $counter }}. {{ $tugas }}</li>
+                                        @php $counter++; @endphp
+                                    @endforeach
+                                </ol>
+                            </div>
                         </div>
+                        
 
+                        <div class="space-y-4">
+                            <div class="">
+                                <p class="font-semibold text-xs ">Servis :</p>
+                                <p class="">{{ $booking->vehicle_type }}</p>
+                            </div>
+                            <div class="">
+                                <p class="font-semibold text-xs ">Keluasan :</p>
+                                <p class="">{{ $booking->land_size }} Hektar</p>
+                            </div>
+                            <div class="">
+                                <p class="font-semibold text-xs ">Tarikh Tugasan :</p>
+                                <p class="">{{ $booking->task_date }}</p>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 
 
-    
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 lg:max-w-4xl">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class=" p-6 text-gray-900">
+    {{-- <form action="{{ route('admin.booking.update', ['booking' => $booking]) }}" method="POST" >
 
-                    <form action="{{ route('admin.booking.update', ['booking' => $booking]) }}" method="POST"
-                        class="flex flex-col gap-2">
+        @csrf
+        @method('PUT') --}}
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 lg:max-w-6xl">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class=" p-6 text-gray-900" x-data>
 
-                        @csrf
-                        @method('PUT')
-                        
-                        <div>
-                            <label for="Anggaran Masa" class="block text-sm font-medium leading-6 text-gray-900">Anggaran Masa</label>
-                            <div class="relative mt-2 rounded-md shadow-sm">
-                                
-                                <input type="text" name="estimated_time_day" class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0">
-                                <div class="absolute inset-y-0 right-0 flex items-center">
-                                    <span class="text-gray-500 sm:text-sm pr-2">Hari</span>
+                <section class="container px-4 mx-auto">
+                    <div class="flex flex-col">
+                        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                                <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                        <thead class="bg-gray-50 dark:bg-gray-800">
+                                            <tr>
+
+                                                <th scope="col"
+                                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                    #
+                                                </th>
+
+                                                <th scope="col"
+                                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                    Tugasan
+                                                </th>
+
+                                                <th scope="col"
+                                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                    Anggaran Masa
+                                                </th>
+
+                                                <th scope="col"
+                                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                    Anggaran Harga
+                                                </th>
+
+                                                <th scope="col" class="relative py-3.5 px-4">
+                                                    <span class="sr-only">Actions</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200" id="added-tasks-list">
+
+                                        </tbody>
+                                    </table>
                                 </div>
-                                
-                            </div>
-
-                            <div class="relative mt-2 rounded-md shadow-sm">
-                                
-                                <input type="text" name="estimated_time_hour" class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0">
-                                <div class="absolute inset-y-0 right-0 flex items-center">
-                                    <span class="text-gray-500 sm:text-sm pr-2">Jam</span>
-                                </div>
-                                
                             </div>
                         </div>
+                    </div>
 
-                        <div>
-                            <label for="Anggaran Harga" class="block text-sm font-medium leading-6 text-gray-900">Anggaran Harga</label>
-                            <div class="relative mt-2 rounded-md shadow-sm">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <span class="text-gray-500 sm:text-sm">RM</span>
+
+                </section>
+
+                {{-- modal  --}}
+                <div x-data="{ modelOpen: false, }" class="mt-12">
+                    <button @click="modelOpen =!modelOpen"
+                        class="flex items-center justify-center px-3 py-2 space-x-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span>Tambah Tugas</span>
+                    </button>
+
+                    <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
+                        role="dialog" aria-modal="true">
+                        <div
+                            class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
+                            <div x-cloak @click="modelOpen = false" x-show="modelOpen"
+                                x-transition:enter="transition ease-out duration-300 transform"
+                                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                x-transition:leave="transition ease-in duration-200 transform"
+                                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                                class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true"></div>
+
+                            <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
+                                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                x-transition:leave="transition ease-in duration-200 transform"
+                                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
+                                <div class="flex items-center justify-between space-x-4">
+                                    <h1 class="text-xl font-medium text-gray-800 ">Tambah Tugas</h1>
+
+                                    <button @click="modelOpen = false"
+                                        class="text-gray-600 focus:outline-none hover:text-gray-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </button>
                                 </div>
-                                <input type="text" name="estimated_cost" id="estimated_cost" class="block w-full rounded-md border-0 py-1.5 pl-10 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00">
-                                <div class="absolute inset-y-0 right-0 flex items-center">
-                                    <span class="text-gray-500 sm:text-sm pr-2">MYR</span>
-                                </div>
+
+                                {{-- <p class="mt-2 text-sm text-gray-500 ">
+                                        Add your teammate to your team and start work to get things done
+                                </p> --}}
+
+                                <form class="mt-5 space-y-4">
+
+                                    <div>
+                                        <label for="Anggaran Masa"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Jenis
+                                            Kenderaan</label>
+
+                                        {{-- <select id="vehicle_type"
+                                            class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                            <option value="Jengkaut">Jengkaut</option>
+                                            <option value="Tracktor">Traktor</option>
+                                            <option value="Jengkaut & Traktor">Jengkaut & Traktor</option>
+                                        </select> --}}
+
+                                        <p> {{ $booking->vehicle_type }}</p>
+
+                                    </div>
+
+                                    <div>
+                                        <label for="Anggaran Masa"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Pilih
+                                            Tugas</label>
+
+                                        <select id="task_select"
+                                            class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+
+                                        </select>
+
+                                    </div>
+
+                                    <div class="">
+                                        <label for="Anggaran Masa"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Anggaran Masa</label>
+                                        <div class="flex space-x-4 w-1/2">
+                                            <div class="relative mt-2 rounded-md shadow-sm">
+
+                                                <input type="text" id="estimated_time_day" value="0"
+                                                    class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    placeholder="0">
+                                                <div class="absolute inset-y-0 right-0 flex items-center">
+                                                    <span class="text-gray-500 sm:text-sm pr-2">Hari</span>
+                                                </div>
+
+                                            </div>
+                                            <div class="relative mt-2 rounded-md shadow-sm">
+                                                <input type="text" id="estimated_time_hour" value="0"
+                                                    class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    placeholder="0">
+                                                <div class="absolute inset-y-0 right-0 flex items-center">
+                                                    <span class="text-gray-500 sm:text-sm pr-2">Jam</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <label for="Estimate price"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Estimated
+                                            Price</label>
+
+                                        <div class="relative mt-2 rounded-md shadow-sm w-1/2">
+
+                                            <input type="text" id="estimated_price" value="0"
+                                                class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                placeholder="0">
+                                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                                <span class="text-gray-500 sm:text-sm pr-2">MYR</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex justify-end mt-6">
+                                        <button type="button" id="add_task_button"
+                                            class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                            Tambah
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        
-
-                        <x-primary-button type="submit" class="mt-4">terima tempahan</x-primary-button>
-                    </form>
+                    </div>
 
 
                 </div>
             </div>
         </div>
-    
+    </div>
 
-        
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 lg:max-w-6xl">
+
+        <form action="{{ route('admin.booking.update', ['booking' => $booking]) }}" method="POST">
+            @csrf
+            <input type="hidden" name="update_task" id="update_task">
+            <input type="hidden" name="update_estimate_time" id="update_estimate_time">
+            <input type="hidden" name="update_estimate_price" id="update_estimate_price">
+            <x-primary-button type="submit" class="mt-4 w-full" id="submit_button">Terima Tempahan</x-primary-button>
+        </form>
+    </div>
+
+    {{-- </form> --}}
+
 
     <script>
-        setTimeout(function() {
-            var element = document.getElementById("session-messages-wrapper");
-            if (element)
-                element.remove();
-        }, 5000); // Remove after 3 seconds (3000 milliseconds)
+        // setTimeout(function() {
+        //     var element = document.getElementById("session-messages-wrapper");
+        //     if (element)
+        //         element.remove();
+        // }, 5000); // Remove after 3 seconds (3000 milliseconds)
+
+        var tasksBackhoe = @json($tasksBackhoe);
+        var tasksTracktor = @json($tasksTracktor);
+        var allTasks = tasksBackhoe.concat(tasksTracktor);
+
+
+
+        // const vehicleTypeSelect = document.getElementById('vehicle_type');
+        const taskSelect = document.getElementById('task_select');
+        const addTaskButton = document.getElementById('add_task_button');
+        const estimatedTimeDay = document.getElementById('estimated_time_day');
+        const estimatedTimeHour = document.getElementById('estimated_time_hour');
+        const estimatedPrice = document.getElementById('estimated_price');
+        const addedTasksContainer = document.getElementById('added-tasks-container');
+        const addedTasksList = document.getElementById('added-tasks-list');
+
+        
+    
+
+        var vehicleType = <?php echo json_encode($booking->vehicle_type); ?>;
+
+        console.log(vehicleType);
+
+        let tasks = [];
+        const addedTasks = [];
+        const addedPrices = [];
+        const addedTimes = [];
+
+        switch (vehicleType) {
+            case 'Jengkaut':
+                tasks = tasksBackhoe;
+
+                break;
+            case 'Tracktor':
+                tasks = tasksTracktor;
+
+                break;
+            case 'Jengkaut & Traktor':
+                tasks = allTasks;
+                break;
+        }
+
+
+        tasks.forEach(t => {
+            const option = document.createElement('option');
+            option.value = t.task_name;
+            option.textContent = `${t.task_name}`;
+            taskSelect.append(option);
+        });
+
+        function addTask() {
+            addedTasks.push(taskSelect.value);
+            addedPrices.push(estimatedPrice.value);
+
+            if (estimatedTimeDay === 0) {
+                addedTimes.push(estimatedTimeHour.value + ' Jam');
+            } else {
+                addedTimes.push(`${estimatedTimeDay.value} Hari ${estimatedTimeHour.value} Jam`)
+            }
+            renderAddedTasks();
+        }
+
+        function renderAddedTasks() {
+            const addedTasksList = document.getElementById('added-tasks-list');
+            addedTasksList.innerHTML = ''; // Clear previous tasks
+
+            addedTasks.forEach((task, index) => {
+                const tr = document.createElement('tr');
+
+                const numberTd = document.createElement('td');
+                numberTd.className = 'px-4 py-4 text-sm text-gray-700 whitespace-nowrap';
+                numberTd.textContent = index + 1;
+
+                const taskTd = document.createElement('td');
+                taskTd.className = 'px-4 py-4 text-sm text-gray-700 whitespace-nowrap';
+                taskTd.textContent = task;
+
+                const timeTd = document.createElement('td');
+                timeTd.className = 'px-4 py-4 text-sm text-gray-700 whitespace-nowrap';
+                timeTd.textContent = addedTimes[index];
+
+                const priceTd = document.createElement('td');
+                priceTd.className = 'px-4 py-4 text-sm text-gray-700 whitespace-nowrap';
+                priceTd.textContent = `RM ${addedPrices[index]}`;
+
+                const removeTd = document.createElement('td');
+                removeTd.className = 'px-4 py-4 text-sm text-gray-700 whitespace-nowrap';
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.classList.add('ml-4', 'text-red-500');
+                removeButton.onclick = () => removeTask(index);
+                removeTd.appendChild(removeButton);
+
+                tr.appendChild(numberTd);
+                tr.appendChild(taskTd);
+                tr.appendChild(timeTd);
+                tr.appendChild(priceTd);
+                tr.appendChild(removeTd);
+
+                addedTasksList.appendChild(tr);
+            });
+        }
+
+        function removeTask(index) {
+            addedTasks.splice(index, 1);
+            addedPrices.splice(index, 1);
+            addedTimes.splice(index, 1);
+            renderAddedTasks();
+        }
+
+        addTaskButton.addEventListener('click', function() {
+            addTask();
+        });
+
+
+        document.getElementById('submit_button').addEventListener('click', function() {
+            event.preventDefault();
+            if(addedTasks.length == 0){
+                alert('Sila Tambah Tugas');
+                return false;
+            }
+            document.getElementById('update_task').value = addedTasks;
+            document.getElementById('update_estimate_time').value = addedTimes;
+            document.getElementById('update_estimate_price').value = addedPrices;
+            event.target.form.submit();
+        });
     </script>
 
 @endsection

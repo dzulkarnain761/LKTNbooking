@@ -56,6 +56,6 @@ class BookingVehicleController extends Controller
             'land_size' => $land_size
         ]);
 
-        return redirect(route('dashboard.pending'));
+        return Redirect::route('dashboard.pending')->with('success-create-order', 'Tempahan Berjaya Dibuat!');
     }
 }

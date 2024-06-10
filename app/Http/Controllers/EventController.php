@@ -4,23 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\BookingVehicle;
 use App\Models\Task;
-use App\Models\Event;
-use App\Models\EventBackhoe;
-use App\Models\EventTracktor;
+
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Redirect;
 
 class EventController extends Controller
 {
-    public function createEvent()
-    {
-    }
+    
 
     public function vehicleCalendar()
     {
+        $checkAuth = auth()->check();
+        if ($checkAuth == false) {
+            return Redirect::route('login');
+        } 
         // for user select
         $vehicles = Vehicle::select('vehicle_type')->distinct()->get();
         $tasksBackhoeDB = Task::where('vehicle_type', 'Backhoe')->get();
@@ -103,28 +103,8 @@ class EventController extends Controller
             }
         }
 
-
+    
+        return view('LKTNbooking.mycalendar', compact('vehicles', 'tasksBackhoe', 'tasksTracktor', 'eventBackhoe', 'eventTracktor'));
         
-
-        // foreach ($bookingTracktor as $booking) {
-        //     $date = new GlobalDateTime($booking->start);
-        //     $eventTracktor[] = array(
-        //         'start' => $date->format('Y-m-d'), // Format the date as 'YYYY-MM-DD'
-        //         'display' => 'background',
-        //     );
-        // }
-
-
-        if (auth()->check()) {
-
-            return view('LKTNbooking.mycalendar', compact('vehicles', 'tasksBackhoe', 'tasksTracktor', 'eventBackhoe', 'eventTracktor'));
-        } else {
-            // User is not logged in, redirect to the login page
-            return redirect('login');
-        }
-
-
-        // return view('LKTNbooking.mycalendar', compact('vehicles', 'tasksBackhoe', 'tasksTracktor', 'eventBackhoe', 'eventTracktor'));
-
     }
 }

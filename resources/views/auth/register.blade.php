@@ -1,5 +1,5 @@
 @extends('layouts.guest')
-
+@section('title', 'Register')
 @section('loginpage')
     <form method="POST" action="{{ route('register') }}">
         @csrf
