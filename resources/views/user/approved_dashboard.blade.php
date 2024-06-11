@@ -150,31 +150,31 @@
                                                         </button>
                                                     </div>
 
-                                                    <form class="mt-5 space-y-4">
+                                                    <form class="mt-5 space-y-4" action="/payment-page" method="GET">
 
                                                         <div class="w-3/4">
                                                             <div class="mb-3 relative">
-                                                                <input type="radio" name="radio-example"
-                                                                    class="sr-only peer" checked="" value="visa"
-                                                                    id="answer_visa">
+                                                                <input type="radio" name="payment_type"
+                                                                    class="sr-only peer" checked="" value="fpx"
+                                                                    id="fpx_payment">
                                                                 <label
                                                                     class="flex p-5 bg-white border rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-500 peer-checked:ring-2 peer-checked:border-transparent"
-                                                                    for="answer_visa">
+                                                                    for="fpx_payment">
                                                                     <div class="flex items-center">
-                                                                        <img src="/images/fpx_logo.png" alt="VISA"
+                                                                        <img src="/images/fpx_logo.png" alt="FPX"
                                                                             class="w-6 h-4 mr-2">
                                                                         <div class="text-sm ">FPX Payment</div>
                                                                     </div>
                                                                 </label>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <input type="radio" name="radio-example"
-                                                                    class="sr-only peer" value="master-card"
-                                                                    id="answer_master-card">
+                                                                <input type="radio" name="payment_type"
+                                                                    class="sr-only peer" value="card"
+                                                                    id="debit_credit_card">
 
                                                                 <label
                                                                     class="flex p-5 bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-500 peer-checked:ring-2 peer-checked:border-transparent"
-                                                                    for="answer_master-card">
+                                                                    for="debit_credit_card">
                                                                     <div class="flex items-center">
                                                                         <img src="/images/visa_logo.png" alt="VISA"
                                                                             class="w-6 h-6 mr-2">
@@ -189,7 +189,7 @@
                                                             <button @click="acceptBooking = false" type="button"
                                                                 class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                                                 Cancel </button>
-                                                            <button type="button" id="add_task_button"
+                                                            <button type="submit" id="add_task_button"
                                                                 class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
                                                                 Bayar Sekarang
                                                             </button>
@@ -223,7 +223,6 @@
                                                 {{ $booking->state }}</p>
                                         </div>
 
-
                                         <div class="">
                                             <p class="font-semibold text-xs ">Tugasan :</p>
                                             <ol class="">
@@ -239,7 +238,6 @@
                                         </div>
 
                                     </div>
-
 
                                     <div class="space-y-4">
                                         <div class="">

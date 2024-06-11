@@ -11,14 +11,12 @@ class DashboardController extends Controller
     public function adminPending()
     {
         $booking = BookingVehicle::where('status', 'pending')->paginate(5);
-        
         return view('admin.pending_dashboard', ['bookings' => $booking]);
     }
 
     public function adminInProgress()
     {
         $booking = BookingVehicle::where('status', 'approved')->orWhere('status', 'confirmed')->paginate(5);
-        
         return view('admin.inprogress_dashboard', ['bookings' => $booking]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookingVehicle;
+use App\Models\TaskLocation;
 use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Http\Request;
@@ -18,7 +19,19 @@ class BookingVehicleController extends Controller
         $selectedTask = request('selectedTask');
         $selectedVehicle = request('selectedVehicle');
 
-        return view('LKTNbooking.confirm_booking_vehicles', compact('selectedDate', 'selectedTask', 'selectedVehicle'));
+        $states = TaskLocation::distinct()->pluck('state')->toArray();
+        $getTaskLocation = TaskLocation::all();
+
+        $district = array();
+        foreach($getTaskLocation as $tasklocation){
+            $district[] = array(
+                'district' => $tasklocation->district,
+                'state' => $tasklocation->state,
+            );
+        }
+        
+    
+        return view('LKTNbooking.confirm_booking_vehicles', compact('selectedDate', 'selectedTask', 'selectedVehicle', 'states','district'));
     }
 
 
@@ -43,6 +56,8 @@ class BookingVehicleController extends Controller
         //     'location' => $location,
         //     'land_size' => $land_size
         // );
+
+        
 
 
         BookingVehicle::create([

@@ -11,16 +11,18 @@
             pointer-events: none;
             opacity: 0.5;
         }
+
+       
     </style>
 @endsection
 
 
 @section('content')
 
-
+    
     <div class="mt-10 mb-10 flex flex-col max-w-5xl mx-auto">
         <div class="p-8 bg-white rounded-md shadow-md flex flex-col items-center">
-            <div class="w-2/5">
+            <div class="w-full md:w-2/5">
                 <div id="info-container" class="flex flex-col space-y-4">
                     <div class="flex flex-col">
                         <label>Jenis Kenderaan : </label>
@@ -240,6 +242,7 @@
                             openModal(info.dateStr, addedTasks, vehicleTypeSelect.value);
                         }
                     },
+
 
                 });
 

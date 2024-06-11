@@ -10,4 +10,8 @@ class UserController extends Controller
         return view('dashboard');
     }
 
+    public function payment(){
+        return view('payment_page');
+    }
+
 }

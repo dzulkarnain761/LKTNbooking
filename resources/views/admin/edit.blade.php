@@ -30,14 +30,14 @@
                                 <p class="font-semibold text-xs ">Nama :</p>
                                 <p class="">{{ $booking->user->name }}</p>
                             </div>
-                            
+
                             <div class="">
                                 <p class="font-semibold text-xs ">Alamat :</p>
                                 <p class="">{{ $booking->location }} , {{ $booking->district }},
                                     {{ $booking->state }}</p>
                             </div>
-    
-                            
+
+
                             <div class="">
                                 <p class="font-semibold text-xs ">Tugasan :</p>
                                 <ol class="">
@@ -52,7 +52,7 @@
                                 </ol>
                             </div>
                         </div>
-                        
+
 
                         <div class="space-y-4">
                             <div class="">
@@ -184,13 +184,6 @@
                                             class="block text-sm font-medium leading-6 text-gray-900">Jenis
                                             Kenderaan</label>
 
-                                        {{-- <select id="vehicle_type"
-                                            class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                            <option value="Jengkaut">Jengkaut</option>
-                                            <option value="Tracktor">Traktor</option>
-                                            <option value="Jengkaut & Traktor">Jengkaut & Traktor</option>
-                                        </select> --}}
-
                                         <p> {{ $booking->vehicle_type }}</p>
 
                                     </div>
@@ -211,18 +204,10 @@
                                         <label for="Anggaran Masa"
                                             class="block text-sm font-medium leading-6 text-gray-900">Anggaran Masa</label>
                                         <div class="flex space-x-4 w-1/2">
-                                            <div class="relative mt-2 rounded-md shadow-sm">
 
-                                                <input type="text" id="estimated_time_day" value="0"
-                                                    class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                    placeholder="0">
-                                                <div class="absolute inset-y-0 right-0 flex items-center">
-                                                    <span class="text-gray-500 sm:text-sm pr-2">Hari</span>
-                                                </div>
-
-                                            </div>
                                             <div class="relative mt-2 rounded-md shadow-sm">
-                                                <input type="text" id="estimated_time_hour" value="0"
+                                                <input type="number" id="estimated_time_hour" value="1"
+                                                    min="1"
                                                     class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                     placeholder="0">
                                                 <div class="absolute inset-y-0 right-0 flex items-center">
@@ -231,20 +216,22 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="">
                                         <label for="Estimate price"
                                             class="block text-sm font-medium leading-6 text-gray-900">Estimated
                                             Price</label>
 
-                                        <div class="relative mt-2 rounded-md shadow-sm w-1/2">
+                                        {{-- <div class="relative mt-2 rounded-md shadow-sm w-1/2">
 
-                                            <input type="text" id="estimated_price" value="0"
+                                            <input type="text" id="estimated_price" readonly
                                                 class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 placeholder="0">
                                             <div class="absolute inset-y-0 right-0 flex items-center">
                                                 <span class="text-gray-500 sm:text-sm pr-2">MYR</span>
                                             </div>
-                                        </div>
+                                        </div> --}}
+                                        <p>RM : <span id="task_price"></span></p>
                                     </div>
 
                                     <div class="flex justify-end mt-6">
@@ -257,8 +244,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -279,47 +264,45 @@
 
 
     <script>
-        // setTimeout(function() {
-        //     var element = document.getElementById("session-messages-wrapper");
-        //     if (element)
-        //         element.remove();
-        // }, 5000); // Remove after 3 seconds (3000 milliseconds)
-
         var tasksBackhoe = @json($tasksBackhoe);
         var tasksTracktor = @json($tasksTracktor);
         var allTasks = tasksBackhoe.concat(tasksTracktor);
 
-
-
         // const vehicleTypeSelect = document.getElementById('vehicle_type');
         const taskSelect = document.getElementById('task_select');
         const addTaskButton = document.getElementById('add_task_button');
-        const estimatedTimeDay = document.getElementById('estimated_time_day');
         const estimatedTimeHour = document.getElementById('estimated_time_hour');
         const estimatedPrice = document.getElementById('estimated_price');
         const addedTasksContainer = document.getElementById('added-tasks-container');
         const addedTasksList = document.getElementById('added-tasks-list');
+        const taskPriceElement = document.getElementById('task_price');
 
-        
-    
 
-        var vehicleType = <?php echo json_encode($booking->vehicle_type); ?>;
 
-        console.log(vehicleType);
+        // var vehicleType = <?php echo json_encode($booking->vehicle_type); ?>;
+
+        const vehicleType = '{{ $booking->vehicle_type }}';
+
+        function decodeHTMLEntities(str) {
+            const tempElement = document.createElement('div');
+            tempElement.innerHTML = str;
+            return tempElement.textContent;
+        }
+
+        const decodedVehicleType = decodeHTMLEntities(vehicleType);
+
 
         let tasks = [];
         const addedTasks = [];
         const addedPrices = [];
         const addedTimes = [];
 
-        switch (vehicleType) {
+        switch (decodedVehicleType) {
             case 'Jengkaut':
                 tasks = tasksBackhoe;
-
                 break;
             case 'Tracktor':
                 tasks = tasksTracktor;
-
                 break;
             case 'Jengkaut & Traktor':
                 tasks = allTasks;
@@ -327,22 +310,47 @@
         }
 
 
+        let taskPrice = 0;
+
+        // Populate task select options
         tasks.forEach(t => {
             const option = document.createElement('option');
-            option.value = t.task_name;
-            option.textContent = `${t.task_name}`;
+            option.value = `${t.task_name},${t.task_price}`;
+            option.textContent = `${t.task_name} - RM ${t.task_price}`;
             taskSelect.append(option);
         });
 
-        function addTask() {
-            addedTasks.push(taskSelect.value);
-            addedPrices.push(estimatedPrice.value);
+        // Update price when a task is selected
+        taskSelect.addEventListener('change', function() {
+            const taskSplit = this.value.split(',');
+            taskPrice = parseFloat(taskSplit[1]);
+            updatePrice();
+        });
 
-            if (estimatedTimeDay === 0) {
-                addedTimes.push(estimatedTimeHour.value + ' Jam');
-            } else {
-                addedTimes.push(`${estimatedTimeDay.value} Hari ${estimatedTimeHour.value} Jam`)
-            }
+        // Update price when estimated time changes
+        estimatedTimeHour.addEventListener('input', function() {
+            updatePrice();
+        });
+
+        function updatePrice() {
+            const estimatedTime = parseFloat(estimatedTimeHour.value);
+            const price = taskPrice * estimatedTime;
+            taskPriceElement.innerText = price.toFixed(2);
+        }
+
+        // Initialize the price on page load
+        if (taskSelect.value) {
+            const taskSplit = taskSelect.value.split(',');
+            taskPrice = parseFloat(taskSplit[1]);
+            updatePrice();
+        }
+
+        function addTask() {
+            const taskSplit = taskSelect.value.split(',');
+            const taskName = taskSplit[0];
+            addedTasks.push(taskName);
+            addedTimes.push(`${estimatedTimeHour.value} Jam`);
+            addedPrices.push(taskPrice * estimatedTimeHour.value);
             renderAddedTasks();
         }
 
@@ -401,7 +409,7 @@
 
         document.getElementById('submit_button').addEventListener('click', function() {
             event.preventDefault();
-            if(addedTasks.length == 0){
+            if (addedTasks.length == 0) {
                 alert('Sila Tambah Tugas');
                 return false;
             }

@@ -20,7 +20,7 @@
             display: none !important;
         }
     </style>
-     
+
 </head>
 
 <body class="font-poppins bg-bgcolor">
@@ -38,7 +38,6 @@
     
     }">
         <header class="shadow-md sticky top-0 bg-bgcolor z-50">
-            
             @yield('header')
         </header>
 
@@ -48,7 +47,7 @@
 
         <footer">
             @yield('footer')
-            </footer>
+        </footer>
 
             {{-- @include('LKTNbooking/partials/modals') --}}
     </div>

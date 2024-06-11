@@ -10,7 +10,6 @@ export default {
     ],
 
     darkMode: 'selector',
-
     theme: {
         extend: {
           colors: {
@@ -25,7 +24,6 @@ export default {
             '128': '32rem',
             '160': '40rem',
             '200': '50rem',
-  
           },
 
           fontFamily: {

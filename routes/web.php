@@ -13,6 +13,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserDashboardController;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ICPasswordResetController;
 
 use App\Mail\TestEmail;
 use Illuminate\Support\Facades\Mail;
@@ -28,6 +29,9 @@ Route::get('/loading', function () {
 Route::get('/test', function () {
     return view('test');
 })->name('test');
+
+Route::get('password/reset-ic', [ICPasswordResetController::class, 'showResetForm'])->name('password.request_ic');
+Route::post('password/reset-ic', [ICPasswordResetController::class, 'reset'])->name('password.update_ic');
 
 
 
@@ -48,6 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard-cancelled', [DashboardController::class, 'userCancelled'])->name('dashboard.cancelled');
 
     Route::post('/dashboard/{booking}/reject', [UserDashboardController::class, 'reject'])->name('booking.reject'); 
+    Route::view('/payment-page', 'payment_page');
 });
 
 Route::get('/generate-quotation/{booking}', [PDFController::class, 'generateQuotation'])->name('view.quotation');

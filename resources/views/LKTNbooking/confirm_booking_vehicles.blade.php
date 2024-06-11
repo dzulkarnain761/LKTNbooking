@@ -16,7 +16,7 @@
     @endphp
 
 
-    <form action="{{ route('create.booking.vehicle') }}" method="POST" >
+    <form action="{{ route('create.booking.vehicle') }}" method="POST">
         @csrf
 
         <div class="mt-10 mb-10 flex flex-col max-w-5xl mx-auto">
@@ -26,35 +26,37 @@
                         <h1 class="font-bold text-lg">Isi Maklumat Tugasan</h1>
                         <br>
 
-                        <div class="flex justify-between">
+                        <div class="flex flex-col md:flex-row md:justify-between">
                             <div class=" px-3 py-2">Negeri :</div>
-                            <div class="w-3/5">
-                                <select name="state" id="" class="w-full border shadow-sm px-3 py-2 rounded-md">
-                                    <option value="Kelantan">Kelantan</option>
-                                    <option value="Terengganu">Terengganu</option>
+                            <div class="w-full md:w-3/5">
+                                
+                                <select id="state" name="state" class="w-full border shadow-sm px-3 py-2 rounded-md" >
+                                    @foreach ($states as $state)
+                                        <option value="{{ $state }}">{{ $state }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="flex justify-between">
+
+                        <div class="flex flex-col md:flex-row md:justify-between">
                             <div class=" px-3 py-2">Daerah :</div>
-                            <div class="w-3/5">
-                                <input type="text" name="district" required
-                                    class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
-                                    placeholder="Daerah" />
+                            <div class="w-full md:w-3/5">
+                                <select id="district" name="district"  class="w-full border shadow-sm px-3 py-2 rounded-md">
+                                </select>
                             </div>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex flex-col md:flex-row md:justify-between">
                             <div class=" px-3 py-2">Lokasi Tugas :</div>
-                            <div class="w-3/5">
+                            <div class="w-full md:w-3/5">
                                 <input type="text" name="location" required
                                     class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
                                     placeholder="Lokasi Tugas" />
                             </div>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex flex-col md:flex-row md:justify-between">
                             <div class=" px-3 py-2">Keluasan Tanah (Hektar):</div>
-                            <div class="w-3/5">
-                                <input type="number" name="land_size" required
+                            <div class="w-full md:w-3/5">
+                                <input type="number" name="land_size" required min="1"
                                     class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
                                     placeholder="Keluasan Tanah" />
                             </div>
@@ -75,26 +77,25 @@
                         <h1 class="font-bold text-lg">Maklumat Anda</h1>
                         <br>
 
-
-                        <div class="flex justify-between">
+                        <div class="flex flex-col md:flex-row md:justify-between">
                             <div class=" px-3 py-2">Nama :</div>
-                            <div class="w-3/5">
+                            <div class="w-full md:w-3/5">
                                 <input type="text"
                                     class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
                                     placeholder="Nama" value="{{ $name }}" disabled />
                             </div>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex flex-col md:flex-row md:justify-between">
                             <div class=" px-3 py-2">No. Telefon : </div>
-                            <div class="w-3/5">
+                            <div class="w-full md:w-3/5">
                                 <input type="text"
                                     class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
                                     placeholder="No Tel" value="{{ $phone_number }}" disabled />
                             </div>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex flex-col md:flex-row md:justify-between">
                             <div class=" px-3 py-2">E mail :</div>
-                            <div class="w-3/5">
+                            <div class="w-full md:w-3/5">
                                 <input type="text"
                                     class="w-full border shadow-sm px-3 py-2 rounded-md  placeholder-gray-500"
                                     placeholder="E mail" value="{{ $email }}" disabled />
@@ -128,6 +129,41 @@
 
     </form>
 
+    <script>
+        let district = @json($district);
+        let selectState = document.getElementById('state');
+        let selectDistrict = document.getElementById('district');
 
+        // Initialize district value based on the initially selected state
+        let initialState = selectState.value;
+        let initialDistricts = district.filter(function(district) {
+            return district.state === initialState;
+        });
 
+        // Populate the district dropdown with the initial districts
+        initialDistricts.forEach(function(district) {
+            let option = document.createElement('option');
+            option.value = district.district;
+            option.text = district.district;
+            selectDistrict.appendChild(option);
+        });
+
+        selectState.addEventListener('change', function() {
+            let selectedState = this.value;
+            let districtsForState = district.filter(function(district) {
+                return district.state === selectedState;
+            });
+
+            // clear the district dropdown
+            selectDistrict.innerHTML = '';
+
+            // populate the district dropdown with the filtered districts
+            districtsForState.forEach(function(district) {
+                let option = document.createElement('option');
+                option.value = district.district;
+                option.text = district.district;
+                selectDistrict.appendChild(option);
+            });
+        });
+    </script>
 @endsection

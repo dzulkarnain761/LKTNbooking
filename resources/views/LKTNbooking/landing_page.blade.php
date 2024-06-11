@@ -8,6 +8,8 @@
 @endsection
 
 @section('content')
+
+    
     {{-- Penginapan --}}
     <section class="mt-8  flex flex-col  md:flex md:flex-row-reverse md:justify-center md:gap-8">
 
