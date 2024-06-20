@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth snap-proximity snap-y ">
 
 <head>
     <meta charset="UTF-8">
@@ -37,11 +37,11 @@
         checkInDate: new Date().toISOString().split('T')[0],
     
     }">
-        <header class="shadow-md sticky top-0 bg-bgcolor z-50">
+        <header class="shadow-sm sticky top-0 bg-bgcolor z-50">
             @yield('header')
         </header>
 
-        <main>
+        <main class="snap-y">
             @yield('content')
         </main>
 

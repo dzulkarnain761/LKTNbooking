@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 @section('title', 'Register')
 @section('loginpage')
-    <form method="POST" action="{{ route('register') }}" x-data>
+    <form method="POST" action="{{ route('register') }}" x-data="{ showPassword: false }">
         @csrf
 
         <!-- Name -->
@@ -50,7 +50,7 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Kata Laluan')" />
 
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password"
+            <x-text-input id="password" class="block mt-1 w-full" x-bind:type="showPassword ? 'text' : 'password'" name="password"
                 autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -60,11 +60,15 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation"
+            <x-text-input id="password_confirmation" class="block mt-1 w-full" x-bind:type="showPassword ? 'text' : 'password'" name="password_confirmation"
                 autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
+        <label class="inline-flex items-center mt-3">
+            <input type="checkbox" @click="showPassword = !showPassword" class="form-checkbox text-indigo-600 rounded-sm outline-none">
+            <span class="ml-2 text-gray-500 text-sm">Show Password</span>
+        </label>
 
         <div class="flex flex-col mt-4 space-y-4">
             <div class="self-start">

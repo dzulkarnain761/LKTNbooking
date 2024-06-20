@@ -5,20 +5,19 @@ use App\Http\Controllers\BookingPenginapanController;
 use App\Http\Controllers\BookingVehicleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\HomePAgeController;
 use App\Http\Controllers\PDFController;
-use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserDashboardController;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ICPasswordResetController;
+use Illuminate\Support\Carbon;
 
 use App\Mail\TestEmail;
 use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
+    
     return view('LKTNbooking.landing_page');
 });
 
@@ -48,10 +47,11 @@ Route::post('/create-booking-booking', [BookingVehicleController::class, 'store'
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard-pending', [DashboardController::class, 'userPending'])->name('dashboard.pending');
     Route::get('/dashboard-approved', [DashboardController::class, 'userApproved'])->name('dashboard.approved');
+    Route::get('/dashboard-inprogress', [DashboardController::class, 'userInProgress'])->name('dashboard.inprogress');
     Route::get('/dashboard-completed', [DashboardController::class, 'userCompleted'])->name('dashboard.completed');
     Route::get('/dashboard-cancelled', [DashboardController::class, 'userCancelled'])->name('dashboard.cancelled');
 
-    Route::post('/dashboard/{booking}/reject', [UserDashboardController::class, 'reject'])->name('booking.reject'); 
+    Route::post('/dashboard/{booking}/reject', [UserDashboardController::class, 'reject'])->name('booking.reject');
     Route::view('/payment-page', 'payment_page');
 });
 
@@ -78,6 +78,7 @@ require __DIR__ . '/auth.php';
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard-pending', [DashboardController::class, 'adminPending'])->name('admin.dashboard.pending');
+    Route::get('admin/dashboard-approved', [DashboardController::class, 'adminApproved'])->name('admin.dashboard.approved');
     Route::get('admin/dashboard-inprogress', [DashboardController::class, 'adminInProgress'])->name('admin.dashboard.inprogress');
     Route::get('admin/dashboard-completed', [DashboardController::class, 'adminCompleted'])->name('admin.dashboard.completed');
     Route::get('admin/dashboard-cancelled', [DashboardController::class, 'adminCancelled'])->name('admin.dashboard.cancelled');

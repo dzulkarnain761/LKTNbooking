@@ -182,6 +182,21 @@
                                                                     </div>
                                                                 </label>
                                                             </div>
+                                                            <div class="mb-3">
+                                                                <input type="radio" name="payment_type"
+                                                                    class="sr-only peer" value="cash"
+                                                                    id="cash_payment">
+
+                                                                <label
+                                                                    class="flex p-5 bg-white border  rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blue-500 peer-checked:ring-2 peer-checked:border-transparent"
+                                                                    for="cash_payment">
+                                                                    <div class="flex items-center">
+                                                                        <img src="/images/visa_logo.png" alt="VISA"
+                                                                            class="w-6 h-6 mr-2">
+                                                                        <div class="text-sm ">Cash</div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
 
                                                         </div>
 

@@ -1,6 +1,6 @@
 <div class="max-w-6xl mx-auto">
     <div>
-        <div class="flex justify-between mx-4 h-14 items-center">
+        <div class="flex justify-between items-center mx-4 h-16 ">
 
 
             <div class="flex gap-8">
@@ -24,10 +24,10 @@
                             @click="openHouse = !openHouse">Penginapan</button>
                         <button class="block text-xs m-4 text-nowrap hover:underline"
                             @click="openHouse = !openHouse">Dewan / Bilik Kuliah</button>
-                        <button class="block text-xs m-4 hover:underline"
-                            @click="openTraktor = !openTraktor">Jengkaut</button>
-                        <button class="block text-xs m-4 hover:underline"
-                            @click="openTraktor = !openTraktor">Traktor</button>
+                        <button class="block text-xs m-4 hover:underline"><a
+                                href="{{ route('vehicle.booking.calendar') }}">Jengkaut</a></button>
+                        <button class="block text-xs m-4 hover:underline"><a
+                                href="{{ route('vehicle.booking.calendar') }}">Traktor</a></button>
                     </div>
                 </nav>
             </div>
@@ -50,12 +50,13 @@
                                 <a href="{{ url('admin/dashboard-pending') }}"
                                     class="px-6 py-2 text-sm hover:underline">Dashboard</a>
                             @else
-                                <a href="{{ url('/dashboard-pending') }}" class="px-6 py-2 text-sm hover:underline">Dashboard</a>
+                                <a href="{{ url('/dashboard-pending') }}"
+                                    class="px-6 py-2 text-sm hover:underline">Dashboard</a>
                             @endif
                         @else
-                                <a href="{{ route('login') }}" class=" px-6 py-2 text-sm hover:underline">
-                                    Log Masuk
-                                </a>
+                            <a href="{{ route('login') }}" class=" px-6 py-2 text-sm hover:underline">
+                                Log Masuk
+                            </a>
                         @endauth
                     </nav>
                 @endif
@@ -73,10 +74,10 @@
                     @click="openHouse = !openHouse">Penginapan</button>
                 <button class="block py-2 px-2 mx-6  hover:underline text-sm"
                     @click="openHouse = !openHouse">Dewan/Bilik Kuliah</button>
-                <button class="block py-2 px-2 mx-6  hover:underline text-sm"
-                    @click="openTraktor = !openTraktor">Jengkaut</button>
-                <button class="block py-2 px-2 mx-6  hover:underline text-sm"
-                    @click="openTraktor = !openTraktor">Traktor</button>
+                <button class="block py-2 px-2 mx-6  hover:underline text-sm"><a
+                        href="{{ route('vehicle.booking.calendar') }}">Jengkaut</a></button>
+                <button class="block py-2 px-2 mx-6  hover:underline text-sm"><a
+                        href="{{ route('vehicle.booking.calendar') }}">Traktor</a></button>
             </div>
             <button class="block py-2 px-2 mx-2  hover:underline text-sm">Hubungi Kami</button>
             @if (Route::has('login'))
@@ -88,9 +89,9 @@
                         <button onclick="window.location='{{ url('/dashboard-pending') }}'"
                             class="block py-2 px-2  mx-2  hover:underline text-sm">Dashboard</button>
                     @endif
-            @else
-                        <button onclick="window.location='{{ route('login') }}'"
-                            class="block py-2 px-2  mx-2 hover:underline text-sm">Log Masuk</button>
+                @else
+                    <button onclick="window.location='{{ route('login') }}'"
+                        class="block py-2 px-2  mx-2 hover:underline text-sm">Log Masuk</button>
                 @endauth
             @endif
 

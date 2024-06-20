@@ -18,15 +18,14 @@
                     </p>
                 </div>
 
-
                 <div class="flex flex-col items-start">
                     <h1 class="mt-5 md:mt-0 font-bold text-black text-base">Tempahan</h1>
                     <button class="block text-sm mt-4 text-black hover:underline"
                         @click="openHouse = !openHouse">Penginapan</button>
                     <button class="text-sm mt-4 text-black hover:underline" @click="openHouse = !openHouse">Dewan</button>
                     <button class="text-sm mt-4 text-black hover:underline" @click="openHouse = !openHouse">Bilik Kuliah</button>
-                    <button class="text-sm mt-4 text-black hover:underline" @click="openTraktor = !openTraktor">Jengkaut</button>
-                    <button class="text-sm mt-4 text-black hover:underline" @click="openTraktor = !openTraktor">Traktor</button>
+                    <button class="text-sm mt-4 text-black hover:underline" @click="openTraktor = !openTraktor"><a href="{{ route('vehicle.booking.calendar') }}">Jengkaut</a></button>
+                    <button class="text-sm mt-4 text-black hover:underline" @click="openTraktor = !openTraktor"><a href="{{ route('vehicle.booking.calendar') }}">Traktor</a></button>
                 </div>
             </div>
 

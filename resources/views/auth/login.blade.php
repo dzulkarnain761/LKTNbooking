@@ -4,13 +4,14 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('login') }}" x-data="{ showPassword: false }">
         @csrf
 
         <!-- Email Address -->
         <div>
             <x-input-label for="input_type" :value="__('Email/Nama Pengguna')" />
-            <x-text-input id="input_type" class="block mt-1 w-full" type="text" name="input_type" :value="old('input_type')"  autofocus autocomplete="username" />
+            <x-text-input id="input_type" class="block mt-1 w-full" type="text" name="input_type" :value="old('input_type')" autofocus
+                autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
             <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
@@ -20,12 +21,14 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Kata Laluan')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            autocomplete="current-password" />
+            <x-text-input id="password" class="block mt-1 w-full" x-bind:type="showPassword ? 'text' : 'password'"
+                name="password" autocomplete="current-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <label class="inline-flex items-center mt-3">
+                <input type="checkbox" @click="showPassword = !showPassword" class="form-checkbox text-indigo-600 rounded-sm outline-none">
+                <span class="ml-2 text-gray-500 text-sm">Show Password</span>
+            </label>
         </div>
 
         {{-- <!-- Remember Me -->
@@ -38,22 +41,22 @@
 
         <div class="flex flex-col items-center mt-4 space-y-2">
             @if (Route::has('password.request'))
-            <div class="self-start flex text-sm">
-                
-                <a class="underline font-semibold text-indigo-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Lupa Kata Laluan?') }}
-                </a>
-            </div>
-                
+                <div class="self-start flex text-sm">
+
+                    <a class="underline font-semibold text-indigo-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        href="{{ route('password.request') }}">
+                        {{ __('Lupa Kata Laluan?') }}
+                    </a>
+                </div>
             @endif
 
             @if (Route::has('register'))
-            <div class="self-start flex text-sm">
-                <a class="underline font-semibold text-indigo-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
-                    {{ __('Belum Mendaftar?') }}
-                </a>
-            </div>
-                
+                <div class="self-start flex text-sm">
+                    <a class="underline font-semibold text-indigo-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        href="{{ route('register') }}">
+                        {{ __('Belum Mendaftar?') }}
+                    </a>
+                </div>
             @endif
 
             <x-primary-button class="w-full">
@@ -62,4 +65,3 @@
         </div>
     </form>
 @endsection
-

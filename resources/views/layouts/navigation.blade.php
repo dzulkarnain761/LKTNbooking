@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-bgcolor shadow-sm">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -17,22 +17,25 @@
                         : route('dashboard.pending')" :active="Auth::user()->usertype == 'admin'
                         ? request()->routeIs('admin.dashboard.pending')
                         : request()->routeIs('dashboard.pending')">
-                        {{ __('Pending') }}
+                        {{ __('Tertunda') }}
                     </x-nav-link>
 
 
 
                     <x-nav-link :href="Auth::user()->usertype == 'admin'
-                        ? route('admin.dashboard.inprogress')
+                        ? route('admin.dashboard.approved')
                         : route('dashboard.approved')" :active="Auth::user()->usertype == 'admin'
-                        ? request()->routeIs('admin.dashboard.inprogress')
+                        ? request()->routeIs('admin.dashboard.approved')
                         : request()->routeIs('dashboard.approved')">
+                        {{ __('Diluluskan') }}
+                    </x-nav-link>
 
-                        @if (Auth::user()->usertype == 'admin')
-                            {{ __('In Progress') }}
-                        @else
-                            {{ __('Approved') }}
-                        @endif
+                    <x-nav-link :href="Auth::user()->usertype == 'admin'
+                        ? route('admin.dashboard.inprogress')
+                        : route('dashboard.inprogress')" :active="Auth::user()->usertype == 'admin'
+                        ? request()->routeIs('admin.dashboard.inprogress')
+                        : request()->routeIs('dashboard.inprogress')">
+                        {{ __('Sedang Berjalan') }}
                     </x-nav-link>
 
 
@@ -41,7 +44,7 @@
                         : route('dashboard.completed')" :active="Auth::user()->usertype == 'admin'
                         ? request()->routeIs('admin.dashboard.completed')
                         : request()->routeIs('dashboard.completed')">
-                        {{ __('Completed') }}
+                        {{ __('Selesai') }}
                     </x-nav-link>
 
                     <x-nav-link :href="Auth::user()->usertype == 'admin'
@@ -49,18 +52,18 @@
                         : route('dashboard.cancelled')" :active="Auth::user()->usertype == 'admin'
                         ? request()->routeIs('admin.dashboard.cancelled')
                         : request()->routeIs('dashboard.cancelled')">
-                        {{ __('Cancelled') }}
+                        {{ __('Dibatalkan') }}
                     </x-nav-link>
 
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden sm:flex sm:items-center sm:ms-6 ">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-bgcolor hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->username }}</div>
 
                             <div class="ms-1">
@@ -119,17 +122,21 @@
                 : request()->routeIs('dashboard.pending')">
                 {{ __('Pending') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="Auth::user()->usertype == 'admin'
+                ? route('admin.dashboard.approved')
+                : route('dashboard.approved')" :active="Auth::user()->usertype == 'admin'
+                ? request()->routeIs('admin.dashboard.approved')
+                : request()->routeIs('dashboard.approved')">
+                {{ __('Approved') }}
+            </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="Auth::user()->usertype == 'admin'
                 ? route('admin.dashboard.inprogress')
-                : route('dashboard.approved')" :active="Auth::user()->usertype == 'admin'
+                : route('dashboard.inprogress')" :active="Auth::user()->usertype == 'admin'
                 ? request()->routeIs('admin.dashboard.inprogress')
-                : request()->routeIs('dashboard.approved')">
-
-                @if (Auth::user()->usertype == 'admin')
-                    {{ __('In Progress') }}
-                @else
-                    {{ __('Approved') }}
-                @endif
+                : request()->routeIs('dashboard.inprogress')">
+                {{ __('In Progress') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="Auth::user()->usertype == 'admin'

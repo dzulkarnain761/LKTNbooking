@@ -3,6 +3,7 @@
 return [
     'custom' => [
         'name' => [
+            
             'required' => 'Sila berikan nama anda.',
             'string' => 'Nilai yang dimasukkan perlu dalam bentuk teks.',
             'max' => [
@@ -10,6 +11,7 @@ return [
             ],
         ],
         'email' => [
+            'required_without' => 'Sila berikan emel.',
             'nullable' => 'Alamat emel tidak boleh dibiarkan kosong.',
             'string' => 'Nilai yang dimasukkan perlu dalam bentuk teks.',
             'lowercase' => 'Alamat emel perlu dalam huruf kecil.',
@@ -36,6 +38,7 @@ return [
             ],
         ],
         'username' => [
+            'required_without' => 'Sila berikan nama pengguna.',
             'required' => 'Sila berikan nama pengguna.',
             'string' => 'Nilai yang dimasukkan perlu dalam bentuk teks.',
             'max' => [

@@ -14,9 +14,15 @@ class DashboardController extends Controller
         return view('admin.pending_dashboard', ['bookings' => $booking]);
     }
 
+    public function adminApproved()
+    {
+        $booking = BookingVehicle::where('status', 'approved')->paginate(5);
+        return view('admin.approved_dashboard', ['bookings' => $booking]);
+    }
+
     public function adminInProgress()
     {
-        $booking = BookingVehicle::where('status', 'approved')->orWhere('status', 'confirmed')->paginate(5);
+        $booking = BookingVehicle::where('status', 'inprogress')->paginate(5);
         return view('admin.inprogress_dashboard', ['bookings' => $booking]);
     }
 
@@ -56,6 +62,16 @@ class DashboardController extends Controller
         $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'approved')->paginate(5);
         
         return view('user.approved_dashboard', ['bookings' => $booking]);
+    }
+
+    public function userInProgress()
+    {
+
+        $user = Auth::user();
+
+        $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'inprogress')->paginate(5);
+        
+        return view('user.inprogress_dashboard', ['bookings' => $booking]);
     }
 
     public function userCompleted()
