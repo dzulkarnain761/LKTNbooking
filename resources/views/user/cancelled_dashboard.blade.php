@@ -171,7 +171,12 @@
                 </div>
             @endforeach
         </div>
+    @else
+        <div class="flex justify-center items-center h-screen">
+            <p>Tiada Tempahan. Kembali ke <a href="/" class="hover:underline text-indigo-500">Halaman Utama</a></p>
+        </div>
     @endif
+
 
 
     <script>

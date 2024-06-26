@@ -126,8 +126,8 @@
                             </td>
 
                             <td>
-                                Invoice #: {{ $booking->id }}<br />
-                                Created: {{ $booking->updated_at->format('d/m/Y') }}<br />
+                                Quotation : #{{ $booking->id }}<br />
+                                Dibuat Pada : {{ $booking->updated_at->format('d/m/Y') }}<br />
                             </td>
                         </tr>
                     </table>
@@ -181,12 +181,22 @@
 
 
             <tr class="heading">
-                <td>Jenis Servis</td>
+                <td>Servis</td>
                 <td></td>
             </tr>
 
             <tr class="details">
                 <td>{{ $booking->vehicle_type }}</td>
+                <td></td>
+            </tr>
+
+            <tr class="heading">
+                <td>Tarikh Tugasan</td>
+                <td></td>
+            </tr>
+
+            <tr class="details">
+                <td>{{ $booking->task_date }}</td>
                 <td></td>
             </tr>
 

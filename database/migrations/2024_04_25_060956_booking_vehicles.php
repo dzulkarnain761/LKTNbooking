@@ -21,13 +21,14 @@ return new class extends Migration
             $table->string('location');
             $table->string('land_size');
             $table->string('task_date');
-            $table->string('estimated_time')->default('pending');
-            $table->string('estimated_cost')->default('pending');
+            $table->string('estimated_time')->default('0');
+            $table->string('estimated_cost')->default('0');
             $table->string('status')->default('pending');
             $table->string('actual_cost')->nullable();
             $table->string('actual_time')->nullable();
             $table->string('rejected_by')->nullable();
             $table->string('rejected_reason')->nullable();
+            $table->string('rejected_by_id_admin')->integer()->nullable();
             $table->timestamps();
         });
     }

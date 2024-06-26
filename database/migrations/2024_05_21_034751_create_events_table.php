@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event_tracktor', function (Blueprint $table) {
-            $table->id();
-            $table->dateTime('start');
-            $table->dateTime('end');
-            $table->timestamps();
-        });
+        // Schema::create('event_tracktor', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->dateTime('start');
+        //     $table->dateTime('end');
+        //     $table->timestamps();
+        // });
 
-        Schema::create('event_backhoe', function (Blueprint $table) {
-            $table->id();
-            $table->dateTime('start');
-            $table->dateTime('end');
-            $table->timestamps();
-        });
+        // Schema::create('event_backhoe', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->dateTime('start');
+        //     $table->dateTime('end');
+        //     $table->timestamps();
+        // });
 
     }
 

@@ -17,8 +17,10 @@
                             <div class="flex flex-wrap cursor-pointer items-center justify-between">
 
                                 <div class="flex flex-col">
-                                    <p class="text-sm font-semibold"> ID Tempahan : <span class="font-normal">{{ $booking->id }}</span> </p>
-                                    <p class="text-sm font-semibold"> Tarikh Tempahan : <span class="font-normal">{{ $booking->created_at->format('d/m/Y') }}</span> </p>
+                                    <p class="text-sm font-semibold"> ID Tempahan : <span
+                                            class="font-normal">{{ $booking->id }}</span> </p>
+                                    <p class="text-sm font-semibold"> Tarikh Tempahan : <span
+                                            class="font-normal">{{ $booking->created_at->format('d/m/Y') }}</span> </p>
                                 </div>
 
                                 <div class="flex items-center gap-8">
@@ -26,8 +28,8 @@
                                         class="hover:underline text-sm text-indigo-500">View Quotation</a>
 
                                     <svg class="h-10 w-4 transition-all duration-500 group-focus:-rotate-180"
-                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" fill="none" viewBox="0 0 24 24">
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2" d="m19 9-7 7-7-7" />
                                     </svg>
@@ -37,10 +39,11 @@
                             <div
                                 class="invisible h-auto max-h-0 items-center opacity-0 transition-all group-focus:visible group-focus:max-h-screen group-focus:opacity-100 group-focus:duration-1000">
 
-                                <div class="flex flex-col space-y-4 md:flex-row md:justify-start md:gap-40 md:items-baseline">
+                                <div
+                                    class="flex flex-col space-y-4 md:flex-row md:justify-start md:gap-40 md:items-baseline">
 
                                     <div class="space-y-4">
-                                        
+
 
                                         <div class="">
                                             <p class="font-semibold text-xs ">Alamat :</p>
@@ -88,6 +91,10 @@
                 </div>
             </div>
         @endforeach
+    @else
+        <div class="flex justify-center items-center h-screen">
+            <p>Tiada Tempahan. Kembali ke <a href="/" class="hover:underline text-indigo-500">Halaman Utama</a></p>
+        </div>
     @endif
 
 @endsection

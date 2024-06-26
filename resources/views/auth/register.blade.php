@@ -58,7 +58,7 @@
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label for="password_confirmation" :value="__('Pastikan Kata Laluan')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full" x-bind:type="showPassword ? 'text' : 'password'" name="password_confirmation"
                 autocomplete="new-password" />
@@ -67,7 +67,7 @@
         </div>
         <label class="inline-flex items-center mt-3">
             <input type="checkbox" @click="showPassword = !showPassword" class="form-checkbox text-indigo-600 rounded-sm outline-none">
-            <span class="ml-2 text-gray-500 text-sm">Show Password</span>
+            <span class="ml-2 text-gray-500 text-sm">Tunjuk Kata Laluan</span>
         </label>
 
         <div class="flex flex-col mt-4 space-y-4">

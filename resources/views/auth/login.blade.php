@@ -27,7 +27,7 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
             <label class="inline-flex items-center mt-3">
                 <input type="checkbox" @click="showPassword = !showPassword" class="form-checkbox text-indigo-600 rounded-sm outline-none">
-                <span class="ml-2 text-gray-500 text-sm">Show Password</span>
+                <span class="ml-2 text-gray-500 text-sm">Tunjuk Kata Laluan</span>
             </label>
         </div>
 

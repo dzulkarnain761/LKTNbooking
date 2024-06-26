@@ -22,7 +22,7 @@
                                     <p class="text-sm font-semibold">Tarikh Tempahan : <span class="font-normal">
                                             {{ $booking->created_at->format('d/m/Y') }} </span></p>
                                     <a href="{{ route('view.quotation', ['booking' => $booking]) }}" target="_blank"
-                                        class="hover:underline text-sm text-indigo-500">View Quotation</a>
+                                        class="hover:underline text-sm text-indigo-500">Lihat Sebut Harga</a>
                                 </div>
 
                                 <div class="flex items-center gap-8">
@@ -84,7 +84,8 @@
                                                     <p class="text-sm font-medium text-gray-500">Anda Pasti Untuk Tolak
                                                         Tempahan ini? Berikan Sebab :</p>
 
-                                                    <form  action="{{route('booking.reject', ['booking' => $booking])}}" method="POST" class="mt-5 space-y-4">
+                                                    <form action="{{ route('booking.reject', ['booking' => $booking]) }}"
+                                                        method="POST" class="mt-5 space-y-4">
                                                         @csrf
                                                         <input type="text" name="rejected_reason"
                                                             class="block w-full rounded-md border-0 py-1.5  pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -228,7 +229,8 @@
                             <div
                                 class="invisible h-auto max-h-0 items-center opacity-0 transition-all group-focus:visible group-focus:max-h-screen group-focus:opacity-100 group-focus:duration-1000">
 
-                                <div class="flex flex-col space-y-4 md:flex-row md:justify-start md:gap-40 md:items-baseline">
+                                <div
+                                    class="flex flex-col space-y-4 md:flex-row md:justify-start md:gap-40 md:items-baseline">
 
                                     <div class="space-y-4">
 
@@ -278,6 +280,10 @@
                 </div>
             </div>
         @endforeach
+    @else
+        <div class="flex justify-center items-center h-screen">
+            <p>Tiada Tempahan. Kembali ke <a href="/" class="hover:underline text-indigo-500">Halaman Utama</a></p>
+        </div>
     @endif
 
 

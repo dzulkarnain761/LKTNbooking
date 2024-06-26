@@ -8,7 +8,7 @@ return [
             'string' => 'Nilai yang dimasukkan perlu dalam bentuk teks.',
             'max' => [
                 'string' => 'Panjang nama tidak boleh melebihi :max aksara.',
-            ],
+            ], 
         ],
         'email' => [
             'required_without' => 'Sila berikan emel.',
@@ -20,6 +20,7 @@ return [
                 'string' => 'Panjang alamat emel tidak boleh melebihi :max aksara.',
             ],
             'unique' => 'Alamat emel ini telah digunakan.',
+            'exists' => 'Sila pastikan emel atau kata laluan anda betul.'
         ],
         'ic_number' => [
             'required' => 'Sila berikan nombor kad pengenalan.',
@@ -45,11 +46,15 @@ return [
                 'string' => 'Panjang nama pengguna tidak boleh melebihi :max aksara.',
             ],
             'unique' => 'Nama pengguna ini telah digunakan.',
+            'exists' => 'Sila pastikan nama pengguna atau kata laluan anda betul.'
         ],
         'password' => [
             'required' => 'Sila berikan kata laluan.',
             'confirmed' => 'Pengesahan kata laluan tidak sepadan.',
             'password' => 'Kata laluan mestilah sekurang-kurangnya 8 aksara panjang dan mengandungi sekurang-kurangnya satu huruf besar, satu huruf kecil, dan satu nombor.',
+            'min' => [
+                'string' => 'Kata laluan mestilah sekurang-kurang :min aksara'
+            ],
         ],
     ],
 ];

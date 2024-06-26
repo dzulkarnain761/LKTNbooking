@@ -60,7 +60,7 @@ class BookingVehicleController extends Controller
         
 
 
-        BookingVehicle::create([
+        $bookingVehicle = BookingVehicle::create([
             'user_id' => $userid,
             'vehicle_type' => $selectedVehicle,
             'task_date' => $selectedDate,
@@ -71,6 +71,6 @@ class BookingVehicleController extends Controller
             'land_size' => $land_size
         ]);
 
-        return Redirect::route('dashboard.pending')->with('success-create-order', 'Tempahan Berjaya Dibuat!');
+        return Redirect::route('dashboard.pending')->with('success-create-order', 'Tempahan Berjaya Dibuat!')->with('bookingVehicle', $bookingVehicle);;
     }
 }
