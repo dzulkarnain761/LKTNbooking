@@ -162,6 +162,14 @@
                                                     <p class="font-semibold text-xs ">Tarikh Tugasan :</p>
                                                     <p class="">{{ $booking->task_date }}</p>
                                                 </div>
+                                                <div class="">
+                                                    <p class="font-semibold text-xs ">Nama Penolak :</p>
+                                                    @php
+                                                        $user = App\Models\User::find($booking->rejected_by_id);
+                                                        $name = $user->name ?? 'Tidak Diketahui';
+                                                    @endphp
+                                                    <p class="">{{ $name }}</p>
+                                                </div>
                                             </div>
                                         </div>
 

@@ -10,7 +10,7 @@ class BookingVehicle extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 
+        'user_id',
         'vehicle_type',
         'task',
         'state',
@@ -24,7 +24,8 @@ class BookingVehicle extends Model
         'actual_time',
         'actual_cost',
         'rejected_by',
-        'rejected_reason'
+        'rejected_reason',
+        'rejected_by_id'
     ];
 
     public function user()
@@ -32,5 +33,8 @@ class BookingVehicle extends Model
         return $this->belongsTo(User::class);
     }
 
-    
+    public function rejectedBy()
+    {
+        return $this->belongsTo(User::class, 'rejected_by_id');
+    }
 }

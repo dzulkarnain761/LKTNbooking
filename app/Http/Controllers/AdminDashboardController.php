@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\BookingVehicle;
 use App\Models\Task;
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+
 
 class AdminDashboardController extends Controller
 {
@@ -71,8 +73,9 @@ class AdminDashboardController extends Controller
 
     public function reject(BookingVehicle $booking, Request $request)
     {
+        $user = Auth::user();
         $rejected_reason = request('rejected_reason');
-        $booking->update(['estimated_time' => 'rejected', 'estimated_cost' => 'rejected', 'status' => 'rejected', 'rejected_by'=> 'admin', 'rejected_reason' => $rejected_reason]);
+        $booking->update(['estimated_time' => 'rejected', 'estimated_cost' => 'rejected', 'status' => 'rejected', 'rejected_by'=> 'Admin', 'rejected_reason' => $rejected_reason, 'rejected_by_id'=> $user->id]);
         return Redirect::route('admin.dashboard.cancelled')->with('tolak', 'Tempahan Ditolak');
     }
 }

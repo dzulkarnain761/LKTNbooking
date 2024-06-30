@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('actual_time')->nullable();
             $table->string('rejected_by')->nullable();
             $table->string('rejected_reason')->nullable();
-            $table->string('rejected_by_id_admin')->integer()->nullable();
+            $table->bigInteger('rejected_by_id')->nullable();
             $table->timestamps();
         });
     }
