@@ -179,8 +179,6 @@
                 let events = [];
                 let disableDate = [];
 
-                // console.log(events.start);
-
                 switch (selectedVehicle) {
                     case 'Jengkaut':
                         tasks = tasksBackhoe;
@@ -211,7 +209,6 @@
                 addTaskButton.style.display = 'block';
                 addedTasksContainer.style.display = 'block';
                 calendarContainer.style.display = 'block'; // Show calendar container
-
 
                 let calendar = new Calendar(calendarEl, {
                     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],

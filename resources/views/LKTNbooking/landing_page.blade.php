@@ -11,7 +11,7 @@
 
     
         {{-- Penginapan --}}
-        <section class="mt-8  flex flex-col  md:flex md:flex-row-reverse md:justify-center md:gap-8 snap-center">
+        <section class="mt-12 md:mt-48 flex flex-col  md:flex md:flex-row-reverse md:justify-center md:gap-8 md:snap-center">
 
             <div class="p-8 max-w-lg self-center md:max-w-xl ">
                 <div class=" flex justify-center gap-8">
@@ -54,7 +54,7 @@
         </section>
 
         {{-- Dewan/bilik Kuliah --}}
-        <section class=" mt-12 md:mt-48 snap-center">
+        <section class=" mt-12 md:mt-48 md:snap-center">
 
             <div class=" gap-32 md:flex md:justify-center">
                 <div class="flex flex-col items-center">
@@ -92,7 +92,7 @@
         </section>
 
         {{-- Jengkaut/Tracktor --}}
-        <section class="mt-12 md:mt-48 snap-center">
+        <section class="mt-12 md:mt-48 md:snap-center">
 
             <div class="flex flex-col items-center gap-10 md:gap-20 md:flex-row md:justify-center">
                 <div class="flex flex-col bg-secondary  h-auto w-72 p-8 rounded-2xl md:h-auto md:w-96">
