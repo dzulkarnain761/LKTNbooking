@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\BookingVehicle;
 use App\Models\TaskLocation;
+use App\Models\User;
+use App\Notifications\BookingNotification;
 use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookingVehicleController extends Controller
 {
-
-
 
     public function confirmBookingVehicle(Request $request)
     {
@@ -23,15 +24,14 @@ class BookingVehicleController extends Controller
         $getTaskLocation = TaskLocation::all();
 
         $district = array();
-        foreach($getTaskLocation as $tasklocation){
+        foreach ($getTaskLocation as $tasklocation) {
             $district[] = array(
                 'district' => $tasklocation->district,
                 'state' => $tasklocation->state,
             );
         }
-        
-    
-        return view('LKTNbooking.confirm_booking_vehicles', compact('selectedDate', 'selectedTask', 'selectedVehicle', 'states','district'));
+
+        return view('LKTNbooking.confirm_booking_vehicles', compact('selectedDate', 'selectedTask', 'selectedVehicle', 'states', 'district'));
     }
 
 
@@ -46,20 +46,6 @@ class BookingVehicleController extends Controller
         $location = request('location');
         $land_size = request('land_size');
 
-        // $allRequest = array(
-        //     'user_id' => $userid,
-        //     'selectedDate' => $selectedDate,
-        //     'selectedTask' => $selectedTask,
-        //     'selectedVehicle' => $selectedVehicle,
-        //     'state' => $state,
-        //     'district' => $district,
-        //     'location' => $location,
-        //     'land_size' => $land_size
-        // );
-
-        
-
-
         $bookingVehicle = BookingVehicle::create([
             'user_id' => $userid,
             'vehicle_type' => $selectedVehicle,
@@ -70,6 +56,12 @@ class BookingVehicleController extends Controller
             'location' => $location,
             'land_size' => $land_size
         ]);
+
+        // // Fetch admin user
+        // $user = $request->user();
+
+        // // Send notification to admin
+        // $user->notify(new BookingNotification($bookingVehicle));
 
         return Redirect::route('dashboard.pending')->with('success-create-order', 'Tempahan Berjaya Dibuat!')->with('bookingVehicle', $bookingVehicle);;
     }

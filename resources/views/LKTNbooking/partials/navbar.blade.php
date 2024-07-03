@@ -13,8 +13,8 @@
 
 
                 {{-- desktop view --}}
-                <nav class="relative hidden md:block">
-                    <button class="text-xs m-2 hover:underline" @click="openTempahan = !openTempahan"
+                <nav class="relative hidden md:block tracking-widest font-medium">
+                    <button class="text-xs m-2 hover:underline " @click="openTempahan = !openTempahan"
                         @click.outside="openTempahan = false">Tempahan</button>
                     {{-- <a href="{{route('user-dashboard')}}"> <button class="text-xs m-2 hover:underline">Lihat Tempahan</button></a> --}}
 
@@ -38,29 +38,37 @@
                 <img src ="logo/hamburger-menu.svg" alt="Hamburger SVG" class="w-10 h-10" x-show="!open" />
             </div>
 
-
-            <div class="hidden md:block border border-black rounded-full">
-                {{-- <button class="block px-4 py-2  text-xs hover:underline"
-                    @click="openLogin = !openLogin">Log Masuk</button> --}}
-
+            
+            
+            
+                
                 @if (Route::has('login'))
-                    <nav class="">
+                
                         @auth
                             @if (Auth::user()->usertype == 'admin')
-                                <a href="{{ url('admin/dashboard-pending') }}"
-                                    class="px-6 py-2 text-sm hover:underline">Dashboard</a>
+                            <button onclick="window.location='{{ route('admin.dashboard.pending') }}'"
+                            class="hidden md:block px-4 py-1 bg-transparent border border-black rounded-full font-medium text-xs text-black hover:text-white focus:text-white tracking-widest hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out " type="button">
+                                Dashboard
+                            </button>
+                               
                             @else
-                                <a href="{{ url('/dashboard-pending') }}"
-                                    class="px-6 py-2 text-sm hover:underline">Dashboard</a>
+                            <button onclick="window.location='{{ route('dashboard.pending') }}'"
+                            class="hidden md:block px-4 py-1 bg-transparent border border-black rounded-full font-medium text-xs text-black hover:text-white focus:text-white tracking-widest hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out " type="button">
+                                Dashboard
+                            </button>
                             @endif
                         @else
-                            <a href="{{ route('login') }}" class=" px-6 py-2 text-sm hover:underline">
-                                Log Masuk
-                            </a>
+                        
+                        <button onclick="window.location='{{ route('login') }}'"
+                        class="hidden md:block px-4 py-1 bg-transparent border border-black rounded-full font-medium text-xs text-black hover:text-white focus:text-white tracking-widest hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out " type="button">
+                            Log Masuk
+                        </button>
+                        
                         @endauth
-                    </nav>
+                    
                 @endif
-            </div>
+            
+           
 
         </div>
 
@@ -83,10 +91,10 @@
             @if (Route::has('login'))
                 @auth
                     @if (Auth::user()->usertype == 'admin')
-                        <button onclick="window.location='{{ url('admin/dashboard-pending') }}'"
+                        <button onclick="window.location='{{ route('admin.dashboard.pending') }}'"
                             class="block py-2 px-2 mx-2  hover:underline text-sm">Dashboard</button>
                     @else
-                        <button onclick="window.location='{{ url('/dashboard-pending') }}'"
+                        <button onclick="window.location='{{ route('dashboard.pending') }}'"
                             class="block py-2 px-2  mx-2  hover:underline text-sm">Dashboard</button>
                     @endif
                 @else

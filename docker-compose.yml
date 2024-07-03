@@ -1,0 +1,34 @@
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laravel-app
+    container_name: laravel-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8080:80"
+    networks:
+      - laravel
+    depends_on:
+      - npm
+
+  npm:
+    image: node:18
+    container_name: vite-server
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    command: /bin/sh -c "npm install && npm run dev"
+    ports:
+      - "3000:3000"
+    networks:
+      - laravel
+
+networks:
+  laravel:
+

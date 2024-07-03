@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/send-test-email', function () {
-    Mail::to('test@example.com')->send(new TestEmail());
+    Mail::to('dzulkarnain761@gmail.com')->send(new TestEmail());
     return 'Test email sent!';
 });
 
