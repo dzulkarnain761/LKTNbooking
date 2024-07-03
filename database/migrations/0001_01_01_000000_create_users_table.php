@@ -24,10 +24,10 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('admins', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-        });
+        // Schema::create('admins', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        // });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
