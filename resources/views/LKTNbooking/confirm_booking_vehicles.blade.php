@@ -16,7 +16,7 @@
     @endphp
 
 
-    <form action="{{ route('create.booking.vehicle') }}" method="POST">
+    <form id="bookingForm" action="{{ route('create.booking.vehicle') }}" method="POST">
         @csrf
 
         <div class="mt-10 mb-10 flex flex-col max-w-5xl mx-auto">
@@ -29,8 +29,8 @@
                         <div class="flex flex-col md:flex-row md:justify-between">
                             <div class=" px-3 py-2">Negeri :</div>
                             <div class="w-full md:w-3/5">
-                                
-                                <select id="state" name="state" class="w-full border shadow-sm px-3 py-2 rounded-md" >
+
+                                <select id="state" name="state" class="w-full border shadow-sm px-3 py-2 rounded-md">
                                     @foreach ($states as $state)
                                         <option value="{{ $state }}">{{ $state }}</option>
                                     @endforeach
@@ -41,7 +41,7 @@
                         <div class="flex flex-col md:flex-row md:justify-between">
                             <div class=" px-3 py-2">Daerah :</div>
                             <div class="w-full md:w-3/5">
-                                <select id="district" name="district"  class="w-full border shadow-sm px-3 py-2 rounded-md">
+                                <select id="district" name="district" class="w-full border shadow-sm px-3 py-2 rounded-md">
                                 </select>
                             </div>
                         </div>
@@ -115,15 +115,15 @@
         </div>
 
         <div class="mt-10 mb-10 flex flex-col max-w-5xl mx-auto">
-            <x-primary-button class="submitButton">Teruskan Tempahan</x-primary-button>
+            <x-primary-button id="submitButton" class="submitButton">Teruskan Tempahan</x-primary-button>
 
-            {{-- kalau load --}}
-            {{-- <x-primary-button class="hover:cursor-not-allowed" disabled>
-                <div class="flex items-center justify-center"> 
-                    <div class="h-4 w-4 border-t-transparent border-solid animate-spin rounded-full border-white border-4"></div>
-                    <div class="ml-2"> Processing... <div>
+            <x-primary-button id="loadingButton" class="hover:cursor-not-allowed" disabled style="display: none;">
+                <div class="flex items-center justify-center">
+                    <div class="h-4 w-4 border-t-transparent border-solid animate-spin rounded-full border-white border-4">
+                    </div>
+                    <div class="ml-2"> Processing... </div>
                 </div>
-            </x-primary-button> --}}
+            </x-primary-button>
         </div>
 
 
@@ -164,6 +164,32 @@
                 option.text = district.district;
                 selectDistrict.appendChild(option);
             });
+        });
+
+        document.getElementById('submitButton').addEventListener('click', function() {
+            // Hide the submit button
+            const form = document.getElementById('bookingForm');
+
+            // Check if the form is valid
+            if (form.checkValidity()) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Hide the submit button
+                this.style.display = 'none';
+
+                // Show the loading button
+                document.getElementById('loadingButton').style.display = '';
+
+                // Submit the form or make the API call here
+                // For example, if you're using a form:
+                form.submit();
+
+                // If you're making an API call, initiate it here
+            } else {
+                // If the form is not valid, show the default validation messages
+                form.reportValidity();
+            }
         });
     </script>
 @endsection
