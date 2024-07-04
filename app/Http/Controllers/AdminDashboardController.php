@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 class AdminDashboardController extends Controller
 {
     public function edit(BookingVehicle $booking)
-    {   
+    {
         $vehicles = Vehicle::select('vehicle_type')->distinct()->get();
         $tasksBackhoeDB = Task::where('vehicle_type', 'Backhoe')->get();
         $tasksTracktorDB = Task::where('vehicle_type', 'Tracktor')->get();
@@ -48,21 +48,22 @@ class AdminDashboardController extends Controller
         $estimated_time = request('update_estimate_time');
         $estimated_price = request('update_estimate_price');
 
-        $allEvent = array([
-            'id' => $id,
-            'update_task' => $task,
-            'estimate_time' => $estimated_time,
-            'estimate_cost' => $estimated_price
-        ]);
+        // $allEvent = array([
+        //     'id' => $id,
+        //     'update_task' => $task,
+        //     'estimate_time' => $estimated_time,
+        //     'estimate_cost' => $estimated_price
+        // ]);
 
 
-        // dd($allEvent);
-       
+        $user = Auth::user();
+
         // Update booking
         $booking->update([
             'task' => $task,
             'estimated_time' => $estimated_time,
             'estimated_cost' => $estimated_price,
+            'updated_by_id' => $user->id,
             'status' => 'approved'
         ]);
 
@@ -75,7 +76,7 @@ class AdminDashboardController extends Controller
     {
         $user = Auth::user();
         $rejected_reason = request('rejected_reason');
-        $booking->update(['estimated_time' => 'rejected', 'estimated_cost' => 'rejected', 'status' => 'rejected', 'rejected_by'=> 'Admin', 'rejected_reason' => $rejected_reason, 'rejected_by_id'=> $user->id]);
+        $booking->update(['estimated_time' => 'rejected', 'estimated_cost' => 'rejected', 'status' => 'rejected', 'rejected_by' => 'Admin', 'rejected_reason' => $rejected_reason, 'updated_by_id' => $user->id]);
         return Redirect::route('admin.dashboard.cancelled')->with('tolak', 'Tempahan Ditolak');
     }
 }

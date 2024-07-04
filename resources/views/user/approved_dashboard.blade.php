@@ -21,6 +21,14 @@
                                             {{ $booking->id }} </span></p>
                                     <p class="text-sm font-semibold">Tarikh Tempahan : <span class="font-normal">
                                             {{ $booking->created_at->format('d/m/Y') }} </span></p>
+                                    {{-- @php
+                                        $user = App\Models\User::find($booking->updated_by_id);
+                                        $name = $user->name ?? 'Tidak Diketahui';
+                                    @endphp
+                                    <p class="font-semibold text-sm ">Diluluskan Oleh : <span class="font-normal">{{ $name }}</span></p> --}}
+
+                                
+
                                     <a href="{{ route('view.quotation', ['booking' => $booking]) }}" target="_blank"
                                         class="hover:underline text-sm text-indigo-500">Lihat Sebut Harga</a>
                                 </div>
@@ -252,6 +260,14 @@
                                                     @php $counter++; @endphp
                                                 @endforeach
                                             </ol>
+                                        </div>
+                                        <div class="">
+                                            <p class="font-semibold text-xs ">Diluluskan Oleh :</p>
+                                            @php
+                                                $user = App\Models\User::find($booking->updated_by_id);
+                                                $name = $user->name ?? 'Tidak Diketahui';
+                                            @endphp
+                                            <p class="">{{ $name }}</p>
                                         </div>
 
                                     </div>

@@ -25,7 +25,7 @@ class BookingVehicle extends Model
         'actual_cost',
         'rejected_by',
         'rejected_reason',
-        'rejected_by_id'
+        'updated_by_id'
     ];
 
     public function user()
@@ -33,8 +33,5 @@ class BookingVehicle extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function rejectedBy()
-    {
-        return $this->belongsTo(User::class, 'rejected_by_id');
-    }
+    
 }

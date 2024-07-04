@@ -18,12 +18,14 @@
 
                             <div class="flex flex-col">
                                 <p class="text-sm font-semibold">ID Tempahan :<span class="font-normal">  {{ $booking->id }} </span></p>
-                                <p class="text-sm font-semibold">Tarikh Tempahan : <span class="font-normal">  {{ $booking->created_at->format('d/m/Y') }} </span></p>
+                                <p class="text-sm font-semibold">Tarikh Tempahan Dibuat: <span class="font-normal">  {{ $booking->created_at->format('d/m/Y') }} </span></p>
+                                <a href="{{ route('view.quotation', ['booking' => $booking]) }}" target="_blank" class="hover:underline text-sm text-indigo-500">Lihat Sebut Harga</a>
                             </div>
                             
 
                             <div class="flex items-center gap-8">
-                                <a href="{{ route('view.quotation', ['booking' => $booking]) }}" target="_blank" class="hover:underline text-sm text-indigo-500">View Quotation</a>
+                                
+                                
                                 <svg class="h-10 w-4 transition-all duration-500 group-focus:-rotate-180"
                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     fill="none" viewBox="0 0 24 24">
@@ -63,6 +65,14 @@
                                             @endforeach
                                         </ol>
                                     </div>
+                                    <div class="">
+                                        <p class="font-semibold text-xs ">Diluluskan Oleh :</p>
+                                        @php
+                                            $user = App\Models\User::find($booking->updated_by_id);
+                                            $name = $user->name ?? 'Tidak Diketahui';
+                                        @endphp
+                                        <p class="">{{ $name }}</p>
+                                    </div>
                                 </div>
                             
                                 <div class="space-y-4 ">
@@ -78,6 +88,8 @@
                                         <p class="font-semibold text-xs ">Tarikh Tugasan :</p>
                                         <p class="">{{ $booking->task_date }}</p>
                                     </div>
+
+                                    
                                 </div>
                             </div>
 

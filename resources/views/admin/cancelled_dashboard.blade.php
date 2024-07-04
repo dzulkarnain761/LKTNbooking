@@ -165,7 +165,7 @@
                                                 <div class="">
                                                     <p class="font-semibold text-xs ">Nama Penolak :</p>
                                                     @php
-                                                        $user = App\Models\User::find($booking->rejected_by_id);
+                                                        $user = App\Models\User::find($booking->updated_by_id);
                                                         $name = $user->name ?? 'Tidak Diketahui';
                                                     @endphp
                                                     <p class="">{{ $name }}</p>

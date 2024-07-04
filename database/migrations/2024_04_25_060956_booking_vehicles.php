@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('booking_vehicles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
             $table->string('vehicle_type');
             $table->string('task');
             $table->string('state');
@@ -26,9 +26,10 @@ return new class extends Migration
             $table->string('status')->default('pending');
             $table->string('actual_cost')->nullable();
             $table->string('actual_time')->nullable();
+            $table->bigInteger('accepted_by_id')->nullable();
             $table->string('rejected_by')->nullable();
             $table->string('rejected_reason')->nullable();
-            $table->bigInteger('rejected_by_id')->nullable();
+            $table->bigInteger('updated_by_id')->nullable();
             $table->timestamps();
         });
     }
