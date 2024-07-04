@@ -15,7 +15,7 @@
                         content: '';
                         display: block;
                         width: 0;
-                        height: 3px;
+                        height: 2px;
                         background: #050505ee;
                         position: absolute;
                         bottom: -3px;
