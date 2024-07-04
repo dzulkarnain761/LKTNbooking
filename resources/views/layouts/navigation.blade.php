@@ -79,7 +79,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Profil') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -89,7 +89,7 @@
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Log Keluar') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -120,7 +120,7 @@
                 : route('dashboard.pending')" :active="Auth::user()->usertype == 'admin'
                 ? request()->routeIs('admin.dashboard.pending')
                 : request()->routeIs('dashboard.pending')">
-                {{ __('Pending') }}
+                {{ __('Tertunda') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="Auth::user()->usertype == 'admin'
@@ -128,7 +128,7 @@
                 : route('dashboard.approved')" :active="Auth::user()->usertype == 'admin'
                 ? request()->routeIs('admin.dashboard.approved')
                 : request()->routeIs('dashboard.approved')">
-                {{ __('Approved') }}
+                {{ __('Diluluskan') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="Auth::user()->usertype == 'admin'
@@ -136,7 +136,7 @@
                 : route('dashboard.inprogress')" :active="Auth::user()->usertype == 'admin'
                 ? request()->routeIs('admin.dashboard.inprogress')
                 : request()->routeIs('dashboard.inprogress')">
-                {{ __('In Progress') }}
+                {{ __('Sedang Berjalan') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="Auth::user()->usertype == 'admin'
@@ -144,7 +144,7 @@
                 : route('dashboard.completed')" :active="Auth::user()->usertype == 'admin'
                 ? request()->routeIs('admin.dashboard.completed')
                 : request()->routeIs('dashboard.completed')">
-                {{ __('Completed') }}
+                {{ __('Selesai') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="Auth::user()->usertype == 'admin'
@@ -152,7 +152,7 @@
                 : route('dashboard.cancelled')" :active="Auth::user()->usertype == 'admin'
                 ? request()->routeIs('admin.dashboard.cancelled')
                 : request()->routeIs('dashboard.cancelled')">
-                {{ __('Cancelled') }}
+                {{ __('Dibatalkan') }}
             </x-responsive-nav-link>
 
         </div>
@@ -166,7 +166,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('Profil') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -176,7 +176,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Log Keluar') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

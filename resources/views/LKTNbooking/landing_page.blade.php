@@ -54,7 +54,7 @@
     </section>
 
     {{-- Dewan/bilik Kuliah --}}
-    <section class=" mt-12 md:mt-48 md:snap-center">
+    <section class=" mt-12 md:mt-48 md:snap-center ">
 
         <div class=" gap-32 md:flex md:justify-center">
             <div class="flex flex-col items-center">
