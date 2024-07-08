@@ -65,9 +65,6 @@ class BookingPenginapanController extends Controller
     {
 
         $rooms = $request->input('rooms');
-
-       
-        // dd($rooms);
         $checkin = $request->input('tarikh-checkin');
         $checkout = $request->input('tarikh-checkout');
         $tempoh = $request->input('tempoh');

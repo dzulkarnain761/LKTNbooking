@@ -27,7 +27,7 @@
 
 {{-- Penginapan/Dewan Modal --}}
 <div x-cloak x-show="openHouse" x-trap="openHouse" class="fixed w-full h-full top-0 left-0 flex items-center">
-    <div class="absolute w-full h-full bg-gray-900 opacity-40"></div>
+    <div class="absolute w-full h-full bg-gray-900 opacity-40 z-40"></div>
 
     <div
         class="relative bg-white border border-black p-10 md:max-w-md mx-auto rounded-xl z-50 flex justify-center items-center w-4/5">

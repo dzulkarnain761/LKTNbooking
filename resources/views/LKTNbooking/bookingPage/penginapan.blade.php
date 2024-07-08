@@ -9,7 +9,7 @@
         </div>
 
 
-        <form method="GET" action="/payment-page-penginapan" name="myForm" onsubmit="return validateForm()">
+        <form method="GET" action="{{route('confirm.booking.penginapan')}}" name="myForm" onsubmit="return validateForm()">
 
             @csrf
 

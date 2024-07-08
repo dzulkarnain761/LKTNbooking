@@ -42,7 +42,7 @@
                     homestay. Rasai keramahan sejati dan cipta kenangan tak terlupakan.</p>
                 <div class="flex justify-center">
                     {{-- <button class="mt-8 bg-secondary p-4 text-white rounded-2xl" @click="openHouse = !openHouse">Tempah Sekarang</button> --}}
-                    <x-primary-button onclick="window.location='{{ route('vehicle.booking.calendar') }}'" class="mt-8 py-4">
+                    <x-primary-button @click="openHouse=true" class="mt-8 py-4">
                         Tempah Sekarang</x-primary-button>
                 </div>
 
@@ -54,7 +54,7 @@
     </section>
 
     {{-- Dewan/bilik Kuliah --}}
-    <section class=" mt-12 md:mt-48 md:snap-center ">
+    <section class=" mt-12 md:mt-48  ">
 
         <div class=" gap-32 md:flex md:justify-center">
             <div class="flex flex-col items-center">
@@ -80,7 +80,7 @@
                         belajar yang optimal. Temukan inspirasi baru di sini.</p>
                     <div class="flex justify-center">
 
-                        <x-primary-button onclick="window.location='{{ route('vehicle.booking.calendar') }}'"
+                        <x-primary-button @click="openHouse=true"
                             class="mt-8 py-4"> Tempah Sekarang</x-primary-button>
 
                     </div>
@@ -93,7 +93,7 @@
     </section>
 
     {{-- Jengkaut/Tracktor --}}
-    <section class="mt-12 md:mt-48 md:snap-center">
+    <section class="mt-12 md:mt-48 ">
 
         <div class="flex flex-col items-center gap-10 md:gap-20 md:flex-row md:justify-center">
             <div class="flex flex-col bg-secondary  h-auto w-72 p-8 rounded-2xl md:h-auto md:w-96">

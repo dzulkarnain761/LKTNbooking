@@ -37,11 +37,11 @@
         checkInDate: new Date().toISOString().split('T')[0],
     
     }">
-        <header class="shadow-sm sticky top-0 bg-bgcolor z-50">
+        <header class="shadow-sm sticky top-0 bg-bgcolor z-20">
             @yield('header')
         </header>
 
-        <main class="snap-y">
+        <main class="">
             @yield('content')
         </main>
 
@@ -49,7 +49,7 @@
             @yield('footer')
         </footer>
 
-            {{-- @include('LKTNbooking/partials/modals') --}}
+            @include('LKTNbooking/partials/modals')
     </div>
 
 </body>

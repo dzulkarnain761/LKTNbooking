@@ -39,7 +39,7 @@ Route::get('/vehicle-booking-calendar', [EventController::class, 'vehicleCalenda
 Route::get('/booking-penginapan', [BookingPenginapanController::class, 'penginapan']);
 Route::get('/booking-jengkaut', [BookingVehicleController::class, 'jengkaut']);
 
-Route::get('/confirm-booking-penginapan', [BookingPenginapanController::class, 'confirmBookingPenginapan']);
+Route::get('/confirm-booking-penginapan', [BookingPenginapanController::class, 'confirmBookingPenginapan'])->name('confirm.booking.penginapan');
 Route::get('/confirm-booking-vehicle', [BookingVehicleController::class, 'confirmBookingVehicle'])->name('confirm.booking.vehicle');
 
 Route::post('/create-booking-booking', [BookingVehicleController::class, 'store'])->name('create.booking.vehicle');
