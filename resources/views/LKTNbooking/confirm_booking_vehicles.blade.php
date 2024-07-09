@@ -12,7 +12,6 @@
         $name = Auth::user()->name;
         $email = Auth::user()->email;
         $phone_number = Auth::user()->phone_number;
-
     @endphp
 
 

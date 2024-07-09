@@ -11,13 +11,14 @@ use App\Http\Controllers\UserDashboardController;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ICPasswordResetController;
+use App\Http\Controllers\PaymentPageController;
 use Illuminate\Support\Carbon;
 
 use App\Mail\TestEmail;
 use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
-    
+
     return view('LKTNbooking.landing_page');
 });
 
@@ -52,7 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard-cancelled', [DashboardController::class, 'userCancelled'])->name('dashboard.cancelled');
 
     Route::post('/dashboard/{booking}/reject', [UserDashboardController::class, 'reject'])->name('booking.reject');
-    Route::view('/payment-page', 'payment_page');
+    Route::GET('/payment-page/{booking}', [PaymentPageController::class, 'payment'])->name('payment.page');
 });
 
 Route::get('/generate-quotation/{booking}', [PDFController::class, 'generateQuotation'])->name('view.quotation');
