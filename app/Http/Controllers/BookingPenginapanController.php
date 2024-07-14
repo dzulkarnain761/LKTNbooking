@@ -69,7 +69,6 @@ class BookingPenginapanController extends Controller
         $checkout = $request->input('tarikh-checkout');
         $tempoh = $request->input('tempoh');
 
-    
         return view('LKTNbooking.confirm_booking_penginapan', [
             'checkin' => $checkin,
             'checkout' => $checkout,

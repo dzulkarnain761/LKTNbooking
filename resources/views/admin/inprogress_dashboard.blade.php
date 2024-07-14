@@ -19,11 +19,26 @@
                             <div class="flex flex-col">
                                 <p class="text-sm font-semibold">ID Tempahan :<span class="font-normal">  {{ $booking->id }} </span></p>
                                 <p class="text-sm font-semibold">Tarikh Tempahan : <span class="font-normal">  {{ $booking->created_at->format('d/m/Y') }} </span></p>
+                                <a href="{{ route('view.quotation', ['booking' => $booking]) }}" target="_blank" class="hover:underline text-sm text-indigo-500">Lihat Sebut Harga</a>
                             </div>
                             
 
                             <div class="flex items-center gap-8">
-                                <a href="{{ route('view.quotation', ['booking' => $booking]) }}" target="_blank" class="hover:underline text-sm text-indigo-500">View Quotation</a>
+
+                                <div class="flex space-x-4">
+                                    <button @click="rejectBooking =!rejectBooking"
+                                        class="flex items-center justify-center px-3 py-2 space-x-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-rose-500 rounded-md hover:bg-rose-600 focus:outline-none focus:bg-rose-500 focus:ring focus:ring-rose-300 focus:ring-opacity-50">
+                                        <span>Selesai</span>
+                                    </button>
+                                    <form action="{{ route('admin.booking.edit.actual.price', ['booking' => $booking]) }}"
+                                        method="GET">
+                                        <button type=submit
+                                            class="flex items-center justify-center px-3 py-2 space-x-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                            <span>Kemas Kini</span>
+                                        </button>
+                                    </form>
+                                </div>
+                                
                                 <svg class="h-10 w-4 transition-all duration-500 group-focus:-rotate-180"
                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     fill="none" viewBox="0 0 24 24">

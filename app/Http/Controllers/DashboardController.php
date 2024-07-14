@@ -10,25 +10,29 @@ class DashboardController extends Controller
 {
     public function adminPending()
     {
-        $booking = BookingVehicle::where('status', 'pending')->paginate(5);
+        $booking = BookingVehicle::where('status', 'pending')->orderBy('updated_at', 'desc')
+            ->paginate(5);
         return view('admin.pending_dashboard', ['bookings' => $booking]);
     }
 
     public function adminApproved()
     {
-        $booking = BookingVehicle::where('status', 'approved')->paginate(5);
+        $booking = BookingVehicle::where('status', 'approved')->orderBy('updated_at', 'desc')
+            ->paginate(5);
         return view('admin.approved_dashboard', ['bookings' => $booking]);
     }
 
     public function adminInProgress()
     {
-        $booking = BookingVehicle::where('status', 'inprogress')->paginate(5);
+        $booking = BookingVehicle::where('status', 'inprogress')->orderBy('updated_at', 'desc')
+            ->paginate(5);
         return view('admin.inprogress_dashboard', ['bookings' => $booking]);
     }
 
     public function adminCompleted()
     {
-        $booking = BookingVehicle::where('status', 'completed')->paginate(5);
+        $booking = BookingVehicle::where('status', 'completed')->orderBy('updated_at', 'desc')
+            ->paginate(5);
         return view('admin.completed_dashboard', ['bookings' => $booking]);
     }
 
@@ -37,7 +41,7 @@ class DashboardController extends Controller
         $bookings = BookingVehicle::where('status', 'rejected')
             ->orderBy('updated_at', 'desc')
             ->paginate(5);
-        
+
         return view('admin.cancelled_dashboard', ['bookings' => $bookings]);
     }
 
@@ -49,8 +53,9 @@ class DashboardController extends Controller
 
         $user = Auth::user();
 
-        $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'pending')->paginate(5);
-        
+        $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'pending')->orderBy('updated_at', 'desc')
+            ->paginate(5);
+
         return view('user.pending_dashboard', ['bookings' => $booking]);
     }
 
@@ -59,8 +64,10 @@ class DashboardController extends Controller
 
         $user = Auth::user();
 
-        $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'approved')->paginate(5);
-        
+        $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'approved')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(5);
+
         return view('user.approved_dashboard', ['bookings' => $booking]);
     }
 
@@ -69,8 +76,10 @@ class DashboardController extends Controller
 
         $user = Auth::user();
 
-        $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'inprogress')->paginate(5);
-        
+        $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'inprogress')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(5);
+
         return view('user.inprogress_dashboard', ['bookings' => $booking]);
     }
 
@@ -78,14 +87,18 @@ class DashboardController extends Controller
     {
 
         $user = Auth::user();
-        $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'completed')->paginate(5);
+        $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'completed')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(5);
         return view('user.completed_dashboard', ['bookings' => $booking]);
     }
 
     public function userCancelled()
     {
         $user = Auth::user();
-        $booking = BookingVehicle::where('user_id', $user->id)->where('status', 'rejected')->paginate(5);
+        $booking = BookingVehicle::where('status', 'rejected')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(5);
         return view('user.cancelled_dashboard', ['bookings' => $booking]);
     }
 }

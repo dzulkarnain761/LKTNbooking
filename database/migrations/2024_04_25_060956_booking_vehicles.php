@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('task_date');
             $table->string('estimated_time')->default('0');
             $table->string('estimated_cost')->default('0');
-            $table->string('status')->default('pending');
+            $table->enum('status', ['pending', 'approved', 'inprogress', 'completed', 'cancelled'])->default('pending');
             $table->string('actual_cost')->nullable();
             $table->string('actual_time')->nullable();
             $table->bigInteger('accepted_by_id')->nullable();
@@ -32,13 +32,17 @@ return new class extends Migration
             $table->bigInteger('updated_by_id')->nullable();
             $table->timestamps();
         });
+        
     }
+
+   
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-    
+        Schema::dropIfExists('booking_vehicles');
+        
     }
 };

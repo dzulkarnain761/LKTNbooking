@@ -28,10 +28,14 @@ class BookingVehicle extends Model
         'updated_by_id'
     ];
 
+    // Define the relationship with the Payment model
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'booking_vehicle_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
-    
 }

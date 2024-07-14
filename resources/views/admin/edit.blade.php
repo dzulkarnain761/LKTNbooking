@@ -126,8 +126,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </section>
 
                 {{-- modal  --}}
@@ -251,7 +249,7 @@
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 lg:max-w-6xl">
 
-        <form action="{{ route('admin.booking.update', ['booking' => $booking]) }}" method="POST">
+        <form action="{{ route('admin.booking.update.estimated', ['booking' => $booking]) }}" method="POST">
             @csrf
             <input type="hidden" name="update_task" id="update_task">
             <input type="hidden" name="update_estimate_time" id="update_estimate_time">

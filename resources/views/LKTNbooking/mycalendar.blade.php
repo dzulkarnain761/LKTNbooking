@@ -201,7 +201,7 @@
                 tasks.forEach(t => {
                     const option = document.createElement('option');
                     option.value = t.task_name;
-                    option.textContent = `${t.task_name} - RM ${t.task_price}`;
+                    option.textContent = `${t.task_name} - RM ${t.task_price}/Jam`;
                     taskSelect.append(option);
                 });
 

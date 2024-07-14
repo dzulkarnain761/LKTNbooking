@@ -39,7 +39,7 @@
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main class="pb-20">
             @yield('dashboard')
         </main>
     </div>

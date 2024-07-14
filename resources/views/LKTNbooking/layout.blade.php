@@ -23,34 +23,33 @@
 
 </head>
 
-<body class="font-poppins bg-bgcolor">
+<body class="font-poppins bg-bgcolor pb-20" x-data="{
 
-    <div x-data="{
-    
-        open: false,
-        openLogin: false,
-        openTempahan: false,
-        openHouse: false,
-        openTraktor: false,
-        sewatype: 'booking-penginapan',
-        vehicletyle: 'booking-jengkaut',
-        checkInDate: new Date().toISOString().split('T')[0],
-    
-    }">
-        <header class="shadow-sm sticky top-0 bg-bgcolor z-20">
-            @yield('header')
-        </header>
+    open: false,
+    openLogin: false,
+    openTempahan: false,
+    openHouse: false,
+    openTraktor: false,
+    sewatype: 'booking-penginapan',
+    vehicletyle: 'booking-jengkaut',
+    checkInDate: new Date().toISOString().split('T')[0],
 
-        <main class="">
-            @yield('content')
-        </main>
+}">
 
-        <footer>
-            @yield('footer')
-        </footer>
 
-            @include('LKTNbooking/partials/modals')
-    </div>
+    @include('LKTNbooking/partials/modals')
+    <header class="shadow-sm sticky top-0 bg-bgcolor z-20">
+        @yield('header')
+    </header>
+
+    <main class="">
+        @yield('content')
+    </main>
+
+    <footer>
+        @yield('footer')
+    </footer>
+
 
 </body>
 

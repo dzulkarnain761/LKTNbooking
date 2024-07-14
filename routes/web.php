@@ -52,9 +52,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard-completed', [DashboardController::class, 'userCompleted'])->name('dashboard.completed');
     Route::get('/dashboard-cancelled', [DashboardController::class, 'userCancelled'])->name('dashboard.cancelled');
 
-    Route::post('/dashboard/{booking}/reject', [UserDashboardController::class, 'reject'])->name('booking.reject');
-    Route::GET('/payment-page/{booking}', [PaymentPageController::class, 'payment'])->name('payment.page');
+    Route::GET('/dashboard/{booking}/reject', [UserDashboardController::class, 'reject'])->name('booking.reject');
+    Route::GET('/select-payment-type/{booking}', [UserDashboardController::class, 'select_payment'])->name('select.payment.type');
+    
 });
+
+Route::GET('/payment_succeed/{booking}', [UserDashboardController::class, 'payment_succeed'])->name('payment.succeed');
 
 Route::get('/generate-quotation/{booking}', [PDFController::class, 'generateQuotation'])->name('view.quotation');
 
@@ -85,6 +88,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard-cancelled', [DashboardController::class, 'adminCancelled'])->name('admin.dashboard.cancelled');
 
     Route::get('/admin/dashboard/{booking}/edit', [AdminDashboardController::class, 'edit'])->name('admin.booking.edit');
-    Route::post('/admin/dashboard/{booking}/update', [AdminDashboardController::class, 'update'])->name('admin.booking.update');
+    Route::get('/admin/dashboard/{booking}/edit-actual-price', [AdminDashboardController::class, 'editActualPrice'])->name('admin.booking.edit.actual.price');
+    Route::post('/admin/dashboard/{booking}/update', [AdminDashboardController::class, 'update_estimated'])->name('admin.booking.update.estimated');
+    Route::post('/admin/dashboard/{booking}/update-actual', [AdminDashboardController::class, 'update_actual'])->name('admin.booking.update.actual');
     Route::post('/admin/dashboard/{booking}/reject', [AdminDashboardController::class, 'reject'])->name('admin.booking.reject');
 });

@@ -7,11 +7,11 @@
         </h2>
     </x-slot>
 
-    @if (session()->has('success-create-order'))
+    @if (session()->has('payment_succeed'))
         <div id="session-messages-wrapper" class="max-w-7xl mx-auto sm:px-6 lg:px-8 lg:max-w-4xl">
             <div x-data="{ show: true }" x-show="show" x-transition:leave.duration.400ms=""
                 class="flex bg-blue-200 text-blue-800 p-4 text-sm rounded border border-blue-300 my-3">
-                <div class="flex-grow">{{ session('success-create-order') }}</div>
+                <div class="flex-grow">{{ session('payment_succeed') }}</div>
                 <div @click="show = false" class="flex-shrink cursor-pointer text-blue-600 hover:text-blue-800"
                     aria-label="Close">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -22,6 +22,8 @@
             </div>
         </div>
     @endif
+
+    
 
     @if ($bookings->isNotEmpty())
         @foreach ($bookings as $booking)

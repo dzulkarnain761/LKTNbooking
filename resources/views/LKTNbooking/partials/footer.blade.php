@@ -1,7 +1,7 @@
 
 
 <div class="mt-12 md:mt-48">
-    <div class="flex  justify-center mb-20">
+    <div class="flex  justify-center">
         <div class="flex flex-col bg-primary  h-auto w-72 p-10 rounded-2xl md:h-auto md:w-5/6 max-w-5xl ">
             <div class="md:flex md:justify-around">
 

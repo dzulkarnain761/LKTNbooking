@@ -6,7 +6,7 @@
 @endsection --}}
 
 @section('content')
-    <form id="bookingForm" action="{{ route('create.booking.vehicle') }}" method="POST" class="mt-28">
+    <form id="bookingForm" action="{{ route('payment.succeed', ['booking' => $booking]) }}" method="GET" class="mt-28">
         @csrf
 
         <div class="mt-10 mb-10 flex flex-col max-w-5xl mx-auto">
@@ -104,7 +104,7 @@
                                         <option value="1">Pembayaran Tunai</option>
                                         <option value="2">Credit/Debit</option>
                                         <option value="3">Online Banking</option>
-                                        
+
                                     </select>
                                 </div>
                             </div>
@@ -170,6 +170,8 @@
                 </div>
             </div>
         </div>
+        
+        <input type="hidden" name="totalPayment" id="totalPayment" value="{{$total_harga}}">
 
         <div class="mt-10 mb-10 flex flex-col max-w-5xl mx-auto">
             <x-primary-button id="submitButton" class="submitButton">Teruskan Tempahan</x-primary-button>
@@ -187,43 +189,7 @@
     </form>
 
 
-    {{-- <script>
-        let district = @json($district);
-        let selectState = document.getElementById('state');
-        let selectDistrict = document.getElementById('district');
-
-        // Initialize district value based on the initially selected state
-        let initialState = selectState.value;
-        let initialDistricts = district.filter(function(district) {
-            return district.state === initialState;
-        });
-
-        // Populate the district dropdown with the initial districts
-        initialDistricts.forEach(function(district) {
-            let option = document.createElement('option');
-            option.value = district.district;
-            option.text = district.district;
-            selectDistrict.appendChild(option);
-        });
-
-        selectState.addEventListener('change', function() {
-            let selectedState = this.value;
-            let districtsForState = district.filter(function(district) {
-                return district.state === selectedState;
-            });
-
-            // clear the district dropdown
-            selectDistrict.innerHTML = '';
-
-            // populate the district dropdown with the filtered districts
-            districtsForState.forEach(function(district) {
-                let option = document.createElement('option');
-                option.value = district.district;
-                option.text = district.district;
-                selectDistrict.appendChild(option);
-            });
-        });
-
+    <script>
         document.getElementById('submitButton').addEventListener('click', function() {
             // Hide the submit button
             const form = document.getElementById('bookingForm');
@@ -249,5 +215,5 @@
                 form.reportValidity();
             }
         });
-    </script> --}}
+    </script>
 @endsection

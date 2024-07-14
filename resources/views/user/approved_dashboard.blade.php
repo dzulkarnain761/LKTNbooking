@@ -43,7 +43,7 @@
                                                 <span>Tolak</span>
                                             </button>
 
-                                            <button onclick="window.location='{{ route('payment.page', ['booking' => $booking]) }}'"
+                                            <button onclick="window.location='{{ route('select.payment.type', ['booking' => $booking]) }}'"
                                                 class="flex items-center justify-center px-3 py-2 space-x-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
                                                 <span>Terima</span>
                                             </button>
